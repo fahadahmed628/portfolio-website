@@ -1,47 +1,41 @@
 
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="Fahad Ahmed - Computer Science undergraduate at FAST-NUCES with experience in full-stack, Android and game development.">
+<meta name="description" content="Fahad Ahmed - Computer Science undergraduate at FAST-NUCES with experience in software engineering, full-stack, Android and game development.">
 
 <title>Fahad Ahmed | Portfolio</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<!-- Apply theme before the website renders -->
+<!-- Load saved theme before rendering -->
 <script>
 (function () {
     let theme = "dark";
 
     try {
-        // New preference key prevents old light-mode settings
-        // from overriding the updated dark default.
-        const savedTheme = localStorage.getItem(
-            "fahad-portfolio-theme-v2"
-        );
+        const saved = localStorage.getItem("fahad-theme-v3");
 
-        if (savedTheme === "light" || savedTheme === "dark") {
-            theme = savedTheme;
+        if (saved === "light" || saved === "dark") {
+            theme = saved;
         }
     } catch (error) {
         theme = "dark";
     }
 
-    document.documentElement.setAttribute(
-        "data-theme",
-        theme
-    );
+    document.documentElement.setAttribute("data-theme", theme);
 })();
 </script>
 
 <style>
 
-/* =====================================
+/* ==================================
    COLOR THEMES
-===================================== */
+================================== */
 
 :root {
     color-scheme: light;
@@ -62,10 +56,9 @@
     --tag-bg: #e8f4fc;
     --tag-text: #2479b5;
 
+    --nav: #ffffff;
     --footer: #2c3e50;
     --footer-text: #ffffff;
-
-    --nav: #ffffff;
 }
 
 [data-theme="dark"] {
@@ -87,15 +80,14 @@
     --tag-bg: #2d3748;
     --tag-text: #90cdf4;
 
+    --nav: #1a1a1a;
     --footer: #0a0a0a;
     --footer-text: #e0e0e0;
-
-    --nav: #1a1a1a;
 }
 
-/* =====================================
-   GLOBAL STYLES
-===================================== */
+/* ==================================
+   GLOBAL
+================================== */
 
 * {
     margin: 0;
@@ -113,16 +105,14 @@ body {
     line-height: 1.65;
     color: var(--text);
     background: var(--background);
-    transition: background-color .25s, color .25s;
+    transition: background-color 0.25s, color 0.25s;
 }
 
 .container {
     width: 100%;
     max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 20px;
-    padding-right: 20px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 a {
@@ -130,16 +120,16 @@ a {
 }
 
 button {
-    font-family: inherit;
+    font: inherit;
 }
 
 button, a {
     -webkit-tap-highlight-color: transparent;
 }
 
-/* =====================================
+/* ==================================
    NAVIGATION
-===================================== */
+================================== */
 
 nav {
     position: fixed;
@@ -184,26 +174,27 @@ nav {
 
 .nav-links a {
     text-decoration: none;
-    color: var(--text);
     font-weight: 500;
-    transition: color .25s;
+    color: var(--text);
+    transition: color 0.25s;
 }
 
 .nav-links a:hover {
     color: var(--primary);
 }
 
-.nav-links a:focus-visible,
-.social-link:focus-visible,
-.cta-button:focus-visible,
-.download-button:focus-visible {
-    outline: 2px solid var(--primary);
-    outline-offset: 4px;
+.mobile-menu-btn {
+    display: none;
+    border: none;
+    background: transparent;
+    color: var(--text);
+    font-size: 1.5rem;
+    cursor: pointer;
 }
 
-/* =====================================
-   THEME TOGGLE
-===================================== */
+/* ==================================
+   THEME SWITCH
+================================== */
 
 .theme-toggle {
     display: flex;
@@ -212,7 +203,7 @@ nav {
 }
 
 .theme-label {
-    font-size: .9rem;
+    font-size: 0.9rem;
     color: var(--text);
 }
 
@@ -235,21 +226,12 @@ nav {
     cursor: pointer;
 
     border-radius: 30px;
-    background: linear-gradient(
-        90deg,
-        #667eea,
-        #764ba2
-    );
-
-    transition: .3s;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    transition: 0.3s;
 }
 
 [data-theme="dark"] .theme-slider {
-    background: linear-gradient(
-        90deg,
-        #4dabf7,
-        #1971c2
-    );
+    background: linear-gradient(90deg, #4dabf7, #1971c2);
 }
 
 .theme-slider::before {
@@ -264,7 +246,7 @@ nav {
     border-radius: 50%;
     background: #ffffff;
 
-    transition: transform .3s;
+    transition: transform 0.3s;
 }
 
 .theme-switch input:checked + .theme-slider::before {
@@ -273,108 +255,241 @@ nav {
 
 .theme-switch input:focus-visible + .theme-slider {
     outline: 2px solid var(--primary);
-    outline-offset: 3px;
+    outline-offset: 4px;
 }
 
-.mobile-menu-btn {
-    display: none;
-    border: none;
-    background: transparent;
-    color: var(--text);
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-/* =====================================
+/* ==================================
    HERO SECTION
-   ALL CONTENT CENTERED
-===================================== */
+================================== */
 
 .hero {
+    min-height: 100vh;
+    padding: 125px 0 75px;
+    background: var(--surface);
+
+    display: flex;
+    align-items: center;
+}
+
+.hero-layout {
     width: 100%;
-    min-height: 85vh;
+    display: grid;
+    grid-template-columns: minmax(0, 390px) minmax(0, 1fr);
+    gap: 65px;
+    align-items: center;
+}
+
+/* PHOTO AREA */
+
+.hero-photo-side {
+    position: relative;
+    min-height: 530px;
 
     display: flex;
     align-items: center;
     justify-content: center;
-
-    padding: 160px 20px 100px;
-
-    background: var(--surface);
-    color: var(--text);
-
-    text-align: center;
 }
 
-.hero .container {
-    width: 100%;
-    max-width: 1000px;
+.hero-photo-hanger {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
 
-    margin: 0 auto;
-    padding: 0;
+    width: 12px;
+    height: 95px;
+    background: var(--heading);
+    border-radius: 10px;
+}
+
+.hero-photo-frame {
+    position: relative;
+
+    width: 315px;
+    height: 410px;
+    padding: 13px;
+
+    border-radius: 27px;
+    background: linear-gradient(145deg, #17283b, #314d68);
+
+    box-shadow: 0 22px 45px var(--shadow);
+
+    transform: rotate(-4deg);
+    transition: transform 0.3s;
+}
+
+.hero-photo-frame:hover {
+    transform: rotate(0deg) translateY(-5px);
+}
+
+.hero-photo-frame::before {
+    content: "";
+
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 80px;
+    height: 14px;
+
+    background: #0b1724;
+    border-radius: 10px;
+    z-index: 2;
+}
+
+.hero-photo {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center center;
+
+    border-radius: 17px;
+    background: #000000;
+}
+
+/* SOCIAL ICONS BESIDE PHOTO */
+
+.hero-socials {
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
 
     display: flex;
     flex-direction: column;
+    gap: 18px;
+}
+
+.hero-socials a {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
     align-items: center;
     justify-content: center;
 
-    text-align: center;
+    border-radius: 50%;
+    background: var(--background);
+    color: var(--primary);
+
+    font-size: 1.2rem;
+    text-decoration: none;
+
+    box-shadow: 0 5px 16px var(--shadow);
+    transition: transform 0.25s, background 0.25s;
 }
 
-.hero h1 {
-    width: 100%;
-    margin: 0 auto 22px;
+.hero-socials a:hover {
+    transform: translateY(-4px);
+    background: var(--primary);
+    color: #ffffff;
+}
 
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 750;
+/* INTRODUCTION */
+
+.hero-content-side {
+    min-width: 0;
+    text-align: left;
+}
+
+.hero-greeting {
+    display: block;
+
+    font-size: clamp(2.8rem, 5vw, 4rem);
+    font-weight: 800;
+    color: var(--primary);
+
+    margin-bottom: 10px;
     line-height: 1.15;
+}
 
+.hero-content-side h1 {
+    font-size: clamp(2.3rem, 4vw, 3.2rem);
+    line-height: 1.25;
+
+    font-weight: 800;
     color: var(--heading);
-    text-align: center;
+    margin-bottom: 22px;
 }
 
-.hero p {
-    width: 100%;
-    max-width: 820px;
-    margin: 0 auto 40px;
-
-    font-size: 1.25rem;
-    color: var(--muted);
-    text-align: center;
+.hero-content-side h1 span {
+    color: var(--primary);
 }
+
+.hero-description {
+    max-width: 780px;
+
+    color: var(--text);
+    font-size: 1.08rem;
+    line-height: 1.8;
+
+    margin-bottom: 28px;
+}
+
+/* SKILLS BADGES */
+
+.hero-skill-pills {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 11px;
+    margin-bottom: 32px;
+}
+
+.hero-skill-pills span {
+    padding: 9px 15px;
+
+    border: 1px solid var(--border);
+    border-radius: 30px;
+
+    background: var(--tag-bg);
+    color: var(--tag-text);
+
+    font-size: 0.83rem;
+    font-weight: 700;
+
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.hero-skill-pills span:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 12px var(--shadow);
+}
+
+/* HERO BUTTONS */
 
 .hero-buttons {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
-    gap: 20px;
-
-    width: 100%;
-    margin: 0 auto;
+    gap: 15px;
 }
 
 .cta-button,
 .download-button {
     display: inline-flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     gap: 10px;
 
-    padding: 14px 30px;
+    padding: 13px 24px;
     border-radius: 30px;
 
-    font-size: 1.05rem;
+    font-size: 0.98rem;
     font-weight: 600;
     text-decoration: none;
 
-    transition: transform .25s, box-shadow .25s;
+    transition: transform 0.25s, box-shadow 0.25s;
 }
 
 .cta-button {
     background: var(--primary);
-    color: #ffffff;
     border: 2px solid var(--primary);
+    color: #ffffff;
 }
 
 [data-theme="dark"] .cta-button {
@@ -390,12 +505,18 @@ nav {
 .cta-button:hover,
 .download-button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 22px var(--shadow);
+    box-shadow: 0 8px 20px var(--shadow);
 }
 
-/* =====================================
-   COMMON SECTION STYLES
-===================================== */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+}
+
+/* ==================================
+   COMMON SECTIONS
+================================== */
 
 section {
     padding: 90px 0;
@@ -408,8 +529,8 @@ section {
 }
 
 .section-title h2 {
-    display: inline-block;
     position: relative;
+    display: inline-block;
 
     font-size: 2.5rem;
     color: var(--heading);
@@ -423,11 +544,12 @@ section {
     width: 60px;
     height: 4px;
 
-    bottom: -9px;
     left: 50%;
-    transform: translateX(-50%);
+    bottom: -9px;
 
+    transform: translateX(-50%);
     border-radius: 3px;
+
     background: var(--primary);
 }
 
@@ -435,74 +557,12 @@ section {
     color: var(--muted);
 }
 
-/* =====================================
-   ABOUT SECTION
-===================================== */
-
-#about {
-    background: var(--background);
-}
-
-.about-content {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 50px;
-    align-items: center;
-}
-
-.profile-img-container {
-    width: 100%;
-    transform: translateY(-120px);
-}
-
-.profile-img {
-    display: block;
-    width: 100%;
-    height: auto;
-
-    border-radius: 20px;
-    box-shadow: 0 10px 30px var(--shadow);
-}
-
-.about-text {
-    min-width: 0;
-}
-
-.about-text h3 {
-    font-size: 1.7rem;
-    color: var(--heading);
-    margin-bottom: 20px;
-}
-
-.about-text p {
-    margin-bottom: 17px;
-    color: var(--text);
-}
-
-.skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 25px;
-}
-
-.skill-tag {
-    padding: 7px 16px;
-    border-radius: 25px;
-
-    background: var(--tag-bg);
-    color: var(--tag-text);
-
-    font-size: .88rem;
-    font-weight: 500;
-}
-
-/* =====================================
+/* ==================================
    RESUME SECTION
-===================================== */
+================================== */
 
 #resume {
-    background: var(--surface);
+    background: var(--background);
 }
 
 .resume-content {
@@ -533,16 +593,18 @@ section {
 
 .timeline-item::before {
     content: "";
-    position: absolute;
 
-    width: 12px;
-    height: 12px;
+    position: absolute;
     left: -43px;
     top: 7px;
 
+    width: 12px;
+    height: 12px;
+
     border-radius: 50%;
     background: var(--primary);
-    border: 3px solid var(--surface);
+
+    border: 3px solid var(--background);
     box-shadow: 0 0 0 2px var(--primary);
 }
 
@@ -572,15 +634,15 @@ section {
     margin-bottom: 6px;
 }
 
-/* =====================================
+/* ==================================
    AWS COURSEWORK
-===================================== */
+================================== */
 
 .cloud-coursework {
     padding: 30px;
     border-radius: 12px;
 
-    background: var(--background);
+    background: var(--surface);
     box-shadow: 0 5px 15px var(--shadow);
 }
 
@@ -595,22 +657,23 @@ section {
 }
 
 .table-wrap {
-    overflow-x: auto;
     width: 100%;
+    overflow-x: auto;
 }
 
 .cloud-table {
     width: 100%;
     border-collapse: collapse;
+
     background: var(--surface);
 }
 
 .cloud-table th {
-    text-align: left;
-    padding: 13px;
-
     background: #2479b5;
     color: #ffffff;
+
+    text-align: left;
+    padding: 13px;
 }
 
 .cloud-table td {
@@ -618,32 +681,32 @@ section {
     border-bottom: 1px solid var(--border);
 }
 
-/* =====================================
-   PROJECT SECTION
-===================================== */
+/* ==================================
+   PROJECTS
+================================== */
 
 #projects {
-    background: var(--background);
+    background: var(--surface);
 }
 
 .projects-grid {
     display: grid;
-    grid-template-columns:
-        repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
 
     gap: 30px;
     align-items: stretch;
 }
 
 .project-card {
-    background: var(--surface);
+    background: var(--background);
+
     border: 1px solid var(--border);
     border-radius: 12px;
-
     overflow: hidden;
+
     box-shadow: 0 5px 15px var(--shadow);
 
-    transition: transform .3s, box-shadow .3s;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .project-card:hover {
@@ -673,7 +736,7 @@ section {
 }
 
 .project-description {
-    font-size: .95rem;
+    font-size: 0.95rem;
     color: var(--muted);
     margin-bottom: 18px;
 }
@@ -694,13 +757,14 @@ section {
 .feature-list li {
     position: relative;
     padding-left: 20px;
-    margin-bottom: 8px;
 
-    font-size: .92rem;
+    margin-bottom: 8px;
+    font-size: 0.92rem;
 }
 
 .feature-list li::before {
     content: "✓";
+
     position: absolute;
     left: 0;
 
@@ -711,6 +775,7 @@ section {
 .project-tech {
     display: flex;
     flex-wrap: wrap;
+
     gap: 8px;
     margin-top: 20px;
 }
@@ -722,27 +787,28 @@ section {
     background: var(--tag-bg);
     color: var(--tag-text);
 
-    font-size: .8rem;
+    font-size: 0.8rem;
     font-weight: 500;
 }
 
-/* =====================================
-   CONTACT SECTION
-===================================== */
+/* ==================================
+   CONTACT
+================================== */
 
 #contact {
-    background: var(--surface);
+    background: var(--background);
 }
 
 .contact-info {
     display: grid;
-    grid-template-columns:
-        repeat(auto-fit, minmax(210px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+
     gap: 25px;
 }
 
 .contact-item {
-    background: var(--background);
+    background: var(--surface);
+
     padding: 25px;
     border-radius: 12px;
 
@@ -770,9 +836,9 @@ section {
     color: var(--primary);
 }
 
-/* =====================================
+/* ==================================
    FOOTER
-===================================== */
+================================== */
 
 footer {
     background: var(--footer);
@@ -789,6 +855,7 @@ footer .logo {
 .social-links {
     display: flex;
     justify-content: center;
+
     gap: 25px;
     margin: 25px 0;
 }
@@ -797,7 +864,7 @@ footer .logo {
     color: var(--footer-text);
     font-size: 1.5rem;
 
-    transition: transform .3s, color .3s;
+    transition: transform 0.3s, color 0.3s;
 }
 
 .social-link:hover {
@@ -806,15 +873,65 @@ footer .logo {
 }
 
 .copyright {
-    border-top: 1px solid rgba(255,255,255,.15);
+    border-top: 1px solid rgba(255,255,255,0.15);
+
     padding-top: 20px;
     margin-top: 25px;
-    font-size: .9rem;
+
+    font-size: 0.9rem;
 }
 
-/* =====================================
+/* ==================================
    RESPONSIVE DESIGN
-===================================== */
+================================== */
+
+@media (max-width: 992px) {
+
+    .hero {
+        min-height: auto;
+        padding: 135px 0 80px;
+    }
+
+    .hero-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .hero-photo-side {
+        min-height: 465px;
+        order: 1;
+        flex-direction: column;
+    }
+
+    .hero-content-side {
+        order: 2;
+        text-align: center;
+    }
+
+    .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons,
+    .hero-skill-pills {
+        justify-content: center;
+    }
+
+    .hero-socials {
+        position: static;
+        transform: none;
+
+        flex-direction: row;
+        justify-content: center;
+
+        margin: 20px auto 0;
+    }
+
+    .hero-photo-hanger {
+        display: none;
+    }
+}
 
 @media (max-width: 768px) {
 
@@ -836,6 +953,7 @@ footer .logo {
         gap: 0;
 
         padding: 15px 20px;
+
         box-shadow: 0 5px 15px var(--shadow);
     }
 
@@ -856,17 +974,25 @@ footer .logo {
         display: none;
     }
 
-    .hero {
-        min-height: 75vh;
-        padding: 140px 15px 70px;
+    section {
+        padding: 75px 0;
+        scroll-margin-top: 75px;
     }
 
-    .hero h1 {
-        font-size: 2.7rem;
+    .section-title h2 {
+        font-size: 2rem;
     }
 
-    .hero p {
-        font-size: 1.1rem;
+    .hero-greeting {
+        font-size: 3rem;
+    }
+
+    .hero-content-side h1 {
+        font-size: 2.4rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
     }
 
     .hero-buttons {
@@ -876,26 +1002,7 @@ footer .logo {
     .cta-button,
     .download-button {
         width: 90%;
-        max-width: 320px;
-    }
-
-    .about-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .profile-img-container {
-        max-width: 320px;
-        margin: 0 auto;
-    }
-
-    section {
-        padding: 75px 0;
-        scroll-margin-top: 75px;
-    }
-
-    .section-title h2 {
-        font-size: 2rem;
+        max-width: 330px;
     }
 }
 
@@ -923,18 +1030,33 @@ footer .logo {
         transform: translateX(24px);
     }
 
-    .hero h1 {
-        font-size: 2.2rem;
+    .hero {
+        padding-top: 115px;
     }
 
-    .hero p {
-        font-size: 1rem;
+    .hero-photo-side {
+        min-height: 380px;
     }
 
-    .projects-grid {
-        grid-template-columns: 1fr;
+    .hero-photo-frame {
+        width: 245px;
+        height: 315px;
     }
 
+    .hero-greeting {
+        font-size: 2.5rem;
+    }
+
+    .hero-content-side h1 {
+        font-size: 2.1rem;
+    }
+
+    .hero-skill-pills span {
+        padding: 7px 13px;
+        font-size: 0.8rem;
+    }
+
+    .projects-grid,
     .contact-info {
         grid-template-columns: 1fr;
     }
@@ -943,14 +1065,21 @@ footer .logo {
         padding-left: 15px;
         padding-right: 15px;
     }
+
+    .cloud-coursework {
+        padding: 18px;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     html {
         scroll-behavior: auto;
     }
 
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
         transition-duration: 0.01ms !important;
         animation-duration: 0.01ms !important;
     }
@@ -961,1119 +1090,94 @@ footer .logo {
 
 <body>
 
-<!-- =====================================
+<!-- ==================================
      NAVIGATION
-===================================== -->
+================================== -->
 
 <nav>
-    <div class="container nav-container">
 
-        <a href="#hero" class="logo">
-            Fahad Ahmed
-        </a>
+<div class="container nav-container">
 
-        <div class="nav-right">
+    <a href="#hero" class="logo">
+        Fahad Ahmed
+    </a>
 
-            <div class="theme-toggle">
-                <span class="theme-label">Theme</span>
+    <div class="nav-right">
 
-                <label class="theme-switch">
-                    <input
-                        type="checkbox"
-                        id="theme-toggle"
-                        aria-label="Toggle dark mode"
-                    >
-                    <span class="theme-slider"></span>
-                </label>
-            </div>
+        <div class="theme-toggle">
 
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#resume">Resume</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            <span class="theme-label">
+                Theme
+            </span>
 
-            <button
-                class="mobile-menu-btn"
-                id="mobile-menu-btn"
-                aria-label="Toggle navigation"
-                aria-expanded="false"
-                aria-controls="nav-links"
-            >
-                <i class="fas fa-bars"></i>
-            </button>
+            <label class="theme-switch">
 
+                <input
+                    type="checkbox"
+                    id="theme-toggle"
+                    aria-label="Toggle dark mode"
+                >
+
+                <span class="theme-slider"></span>
+
+            </label>
         </div>
+
+        <ul class="nav-links" id="nav-links">
+
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+
+        </ul>
+
+        <button
+            class="mobile-menu-btn"
+            id="mobile-menu-btn"
+            aria-label="Toggle navigation"
+            aria-expanded="false"
+            aria-controls="nav-links"
+        >
+            <i class="fas fa-bars"></i>
+        </button>
+
     </div>
+
+</div>
+
 </nav>
 
-<!-- =====================================
-     HERO
-===================================== -->
+<!-- ==================================
+     HERO - MAIN INTRODUCTION
+================================== -->
 
 <section id="hero" class="hero">
 
-    <div class="container">
+<div class="container hero-layout">
 
-        <h1>Fahad Ahmed</h1>
+    <!-- PROFILE PHOTO -->
 
-        <p>
-            Computer Science Undergraduate at FAST-NUCES |
-            Software Engineering | Full-Stack, Android &
-            Game Development
-        </p>
+    <div class="hero-photo-side">
 
-        <div class="hero-buttons">
+        <div class="hero-photo-hanger"></div>
 
-            <a href="#about" class="cta-button">
-                <i class="fas fa-arrow-right"></i>
-                Explore My Portfolio
-            </a>
+        <div class="hero-photo-frame">
 
-            <a
-                href="Fahad_Ahmed_Resume.pdf"
-                class="download-button"
-                download="Fahad_Ahmed_Resume.pdf"
+            <img
+                src="myPic.jpg"
+                alt="Fahad Ahmed"
+                class="hero-photo"
             >
-                <i class="fas fa-download"></i>
-                Download My Resume
-            </a>
 
         </div>
 
-    </div>
+        <!-- SOCIAL ICONS -->
 
-</section>
-
-<!-- =====================================
-     ABOUT
-===================================== -->
-
-<section id="about">
-
-    <div class="container">
-
-        <div class="section-title">
-            <h2>About Me</h2>
-            <p>
-                My background, technical skills and experience
-            </p>
-        </div>
-
-        <div class="about-content">
-
-            <div class="profile-img-container">
-                <img
-                    src="myPic.jpg"
-                    alt="Fahad Ahmed"
-                    class="profile-img"
-                >
-            </div>
-
-            <div class="about-text">
-
-                <h3>Professional Profile</h3>
-
-                <p>
-                    I'm a Computer Science undergraduate at
-                    FAST-NUCES, Lahore, with hands-on experience
-                    in Software Engineering, Full-Stack
-                    Development, Android Application Development,
-                    and Game Development.
-                </p>
-
-                <p>
-                    During my internship at Tintash, I worked
-                    with Unity and C# on interactive 2D and 3D
-                    gameplay features. At Yorker Marketing
-                    Agency, I developed Android application
-                    functionality for No Filter Coffee,
-                    focusing on user interfaces, navigation,
-                    and business requirements.
-                </p>
-
-                <p>
-                    I've built a range of applications including
-                    Fixify, a full-stack service marketplace;
-                    Pelagia, an Android hotel booking
-                    application; and FastMart, an Android
-                    e-commerce project featuring buyer and
-                    seller workflows.
-                </p>
-
-                <p>
-                    I enjoy solving technical problems,
-                    building useful applications, and
-                    exploring new technologies. I am also
-                    interested in Artificial Intelligence
-                    and Machine Learning.
-                </p>
-
-                <h3>Technical Skills</h3>
-
-                <div class="skills">
-
-                    <span class="skill-tag">C++</span>
-                    <span class="skill-tag">Java</span>
-                    <span class="skill-tag">C#</span>
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">TypeScript</span>
-                    <span class="skill-tag">SQL</span>
-
-                    <span class="skill-tag">HTML</span>
-                    <span class="skill-tag">CSS</span>
-                    <span class="skill-tag">React</span>
-                    <span class="skill-tag">FastAPI</span>
-                    <span class="skill-tag">Tailwind CSS</span>
-
-                    <span class="skill-tag">Android Studio</span>
-                    <span class="skill-tag">Android SDK</span>
-                    <span class="skill-tag">React Native</span>
-                    <span class="skill-tag">XML</span>
-
-                    <span class="skill-tag">Firebase</span>
-                    <span class="skill-tag">Firebase Authentication</span>
-                    <span class="skill-tag">Realtime Database</span>
-                    <span class="skill-tag">Firestore</span>
-                    <span class="skill-tag">SQLite</span>
-
-                    <span class="skill-tag">REST APIs</span>
-                    <span class="skill-tag">MVVM</span>
-                    <span class="skill-tag">Unity 2D/3D</span>
-                    <span class="skill-tag">Game Development</span>
-
-                    <span class="skill-tag">AWS</span>
-                    <span class="skill-tag">Git</span>
-                    <span class="skill-tag">GitHub</span>
-                    <span class="skill-tag">Data Structures</span>
-                    <span class="skill-tag">OOP</span>
-                    <span class="skill-tag">Assembly Language</span>
-
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<!-- =====================================
-     RESUME
-===================================== -->
-
-<section id="resume">
-
-    <div class="container">
-
-        <div class="section-title">
-            <h2>Resume</h2>
-            <p>
-                Education, professional experience and achievements
-            </p>
-        </div>
-
-        <div class="resume-content">
-
-            <!-- EXPERIENCE -->
-
-            <div class="resume-category">
-
-                <h3>Professional Experience</h3>
-
-                <div class="timeline">
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">2026</div>
-
-                        <h4 class="timeline-title">
-                            App Development Intern
-                        </h4>
-
-                        <div class="timeline-company">
-                            Yorker Marketing Agency — Lahore
-                        </div>
-
-                        <ul>
-                            <li>
-                                Developed an Android application
-                                for No Filter Coffee.
-                            </li>
-                            <li>
-                                Translated business requirements
-                                into mobile features.
-                            </li>
-                            <li>
-                                Designed UI components and
-                                implemented application functionality.
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">2025</div>
-
-                        <h4 class="timeline-title">
-                            Game Development Intern
-                        </h4>
-
-                        <div class="timeline-company">
-                            Tintash — Lahore
-                        </div>
-
-                        <ul>
-                            <li>
-                                Developed gameplay features using
-                                Unity and C#.
-                            </li>
-                            <li>
-                                Worked with 2D and 3D game mechanics.
-                            </li>
-                            <li>
-                                Implemented player interactions,
-                                physics and level navigation.
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">2026</div>
-
-                        <h4 class="timeline-title">
-                            Campus Ambassador
-                        </h4>
-
-                        <div class="timeline-company">
-                            Safir Tours — Lahore
-                        </div>
-
-                        <ul>
-                            <li>
-                                Promoted travel opportunities
-                                and engaged with students.
-                            </li>
-                            <li>
-                                Supported outreach initiatives
-                                and student engagement.
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- EDUCATION -->
-
-            <div class="resume-category">
-
-                <h3>Education</h3>
-
-                <div class="timeline">
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">
-                            2023 – Present
-                        </div>
-
-                        <h4 class="timeline-title">
-                            BS Computer Science
-                        </h4>
-
-                        <div class="timeline-company">
-                            FAST-NUCES, Lahore
-                        </div>
-
-                        <p>
-                            Focus Areas: Artificial Intelligence,
-                            Full-Stack Development, Android
-                            Development and Game Development.
-                        </p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">
-                            2021 – 2023
-                        </div>
-
-                        <h4 class="timeline-title">
-                            A-Levels (1 A* &amp; 2 As)
-                        </h4>
-
-                        <div class="timeline-company">
-                            Beaconhouse School, Lahore
-                        </div>
-
-                        <p>
-                            Awarded a 100% merit scholarship
-                            and Medal of Honor.
-                        </p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">
-                            2019 – 2021
-                        </div>
-
-                        <h4 class="timeline-title">
-                            O-Levels (7 A*)
-                        </h4>
-
-                        <div class="timeline-company">
-                            Beaconhouse School, Lahore
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- LEADERSHIP -->
-
-            <div class="resume-category">
-
-                <h3>Leadership &amp; Activities</h3>
-
-                <div class="timeline">
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">
-                            2022 – 2023
-                        </div>
-
-                        <h4 class="timeline-title">
-                            President — IT &amp; Gaming Society
-                        </h4>
-
-                        <div class="timeline-company">
-                            Beaconhouse A-Levels
-                        </div>
-
-                        <p>
-                            Led society activities and
-                            organized technology-driven events,
-                            including Colosseum.
-                        </p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">2019</div>
-
-                        <h4 class="timeline-title">
-                            Model United Nations
-                        </h4>
-
-                        <div class="timeline-company">
-                            Beaconhouse School
-                        </div>
-
-                        <p>
-                            Developed public speaking,
-                            critical thinking and diplomacy skills.
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- AWS COURSEWORK -->
-
-            <div class="cloud-coursework">
-
-                <h3>AWS Cloud Computing Coursework</h3>
-
-                <p>
-                    Completed hands-on AWS coursework
-                    involving IAM, EC2, VPC, EBS, Lambda,
-                    database services and scalable
-                    cloud infrastructure.
-                </p>
-
-                <div class="table-wrap">
-
-                    <table class="cloud-table">
-
-                        <thead>
-                            <tr>
-                                <th>Lab</th>
-                                <th>Score</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td>AWS Lambda Labs</td>
-                                <td>100 / 100</td>
-                            </tr>
-                            <tr>
-                                <td>Introduction to AWS IAM</td>
-                                <td>100 / 100</td>
-                            </tr>
-                            <tr>
-                                <td>Build a VPC and Web Server</td>
-                                <td>100 / 100</td>
-                            </tr>
-                            <tr>
-                                <td>Introduction to Amazon EC2</td>
-                                <td>100 / 100</td>
-                            </tr>
-                            <tr>
-                                <td>Working with EBS</td>
-                                <td>100 / 100</td>
-                            </tr>
-                            <tr>
-                                <td>Build a Database Server</td>
-                                <td>100 / 100</td>
-                            </tr>
-                            <tr>
-                                <td>Scale &amp; Load Balance</td>
-                                <td>100 / 100</td>
-                            </tr>
-                        </tbody>
-
-                    </table>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- =====================================
-     PROJECTS
-===================================== -->
-
-<section id="projects">
-
-    <div class="container">
-
-        <div class="section-title">
-            <h2>Projects</h2>
-            <p>
-                Applications and software projects I have developed
-            </p>
-        </div>
-
-        <div class="projects-grid">
-
-            <!-- 1. FIXIFY -->
-
-            <div class="project-card">
-
-                <div class="project-img"
-                    style="background:linear-gradient(135deg,#667eea,#764ba2)">
-                    <i class="fas fa-tools"></i>
-                </div>
-
-                <div class="project-info">
-
-                    <h3 class="project-title">
-                        Fixify – Service Marketplace
-                    </h3>
-
-                    <p class="project-description">
-                        Full-stack service marketplace
-                        connecting customers with service
-                        providers using React, TypeScript
-                        and FastAPI.
-                    </p>
-
-                    <div class="project-features">
-                        <h4>Key Features:</h4>
-                        <ul class="feature-list">
-                            <li>Customer and provider roles</li>
-                            <li>Service browsing and booking</li>
-                            <li>Appointment scheduling</li>
-                            <li>Real-time communication</li>
-                            <li>Admin dashboard</li>
-                            <li>API-backed functionality</li>
-                        </ul>
-                    </div>
-
-                    <div class="project-tech">
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">TypeScript</span>
-                        <span class="tech-tag">FastAPI</span>
-                        <span class="tech-tag">Tailwind CSS</span>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- 2. FAST MART -->
-
-            <div class="project-card">
-
-                <div class="project-img"
-                    style="background:linear-gradient(135deg,#ff7b36,#f7b733)">
-                    <i class="fas fa-shopping-cart"></i>
-                </div>
-
-                <div class="project-info">
-
-                    <h3 class="project-title">
-                        FastMart – E-Commerce Android App
-                    </h3>
-
-                    <p class="project-description">
-                        Android e-commerce application developed
-                        for Software for Mobile Devices coursework,
-                        featuring buyer and seller accounts,
-                        Firebase integration and product
-                        management workflows.
-                    </p>
-
-                    <div class="project-features">
-
-                        <h4>Key Features:</h4>
-
-                        <ul class="feature-list">
-                            <li>Buyer and seller account roles</li>
-                            <li>Firebase Authentication</li>
-                            <li>Realtime product database</li>
-                            <li>Product listings and management</li>
-                            <li>SQLite cart and favourites</li>
-                            <li>Checkout and order history</li>
-                            <li>Buyer-seller messaging</li>
-                            <li>Light and dark theme support</li>
-                            <li>MVVM architecture</li>
-                        </ul>
-
-                    </div>
-
-                    <div class="project-tech">
-                        <span class="tech-tag">Android Studio</span>
-                        <span class="tech-tag">Java</span>
-                        <span class="tech-tag">XML</span>
-                        <span class="tech-tag">Firebase</span>
-                        <span class="tech-tag">SQLite</span>
-                        <span class="tech-tag">MVVM</span>
-                    </div>
-
-                    <p style="margin-top:14px;color:var(--primary);font-weight:600;">
-                        Academic Achievement: Full Marks
-                    </p>
-
-                </div>
-            </div>
-
-            <!-- 3. NO FILTER COFFEE -->
-
-            <div class="project-card">
-
-                <div class="project-img"
-                    style="background:linear-gradient(135deg,#6f4e37,#c49a6c)">
-                    <i class="fas fa-mug-hot"></i>
-                </div>
-
-                <div class="project-info">
-
-                    <h3 class="project-title">
-                        No Filter Coffee Shop App
-                    </h3>
-
-                    <p class="project-description">
-                        Android coffee shop application
-                        developed with Java, XML and Firebase,
-                        focusing on product browsing and
-                        customer ordering workflows.
-                    </p>
-
-                    <div class="project-features">
-                        <h4>Key Features:</h4>
-                        <ul class="feature-list">
-                            <li>Coffee product browsing</li>
-                            <li>Product selection</li>
-                            <li>Customer ordering workflow</li>
-                            <li>Interactive Android screens</li>
-                            <li>Mobile navigation and UI design</li>
-                        </ul>
-                    </div>
-
-                    <div class="project-tech">
-                        <span class="tech-tag">Android Studio</span>
-                        <span class="tech-tag">Java</span>
-                        <span class="tech-tag">XML</span>
-                        <span class="tech-tag">Firebase</span>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- 4. PELAGIA -->
-
-            <div class="project-card">
-
-                <div class="project-img"
-                    style="background:linear-gradient(135deg,#187b9d,#54c6ca)">
-                    <i class="fas fa-hotel"></i>
-                </div>
-
-                <div class="project-info">
-
-                    <h3 class="project-title">
-                        Pelagia Hotel Booking App
-                    </h3>
-
-                    <p class="project-description">
-                        Android hotel booking application
-                        with authentication, hotel listings,
-                        booking workflows and
-                        Firebase-backed reservation management.
-                    </p>
-
-                    <div class="project-features">
-                        <h4>Key Features:</h4>
-                        <ul class="feature-list">
-                            <li>User authentication</li>
-                            <li>Hotel listings and room details</li>
-                            <li>Booking workflows</li>
-                            <li>Firestore reservation management</li>
-                        </ul>
-                    </div>
-
-                    <div class="project-tech">
-                        <span class="tech-tag">Android</span>
-                        <span class="tech-tag">Java</span>
-                        <span class="tech-tag">XML</span>
-                        <span class="tech-tag">Firebase</span>
-                        <span class="tech-tag">Firestore</span>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- 5. EXPENSE TRACKER -->
-
-            <div class="project-card">
-
-                <div class="project-img"
-                    style="background:linear-gradient(135deg,#4CAF50,#8BC34A)">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-
-                <div class="project-info">
-
-                    <h3 class="project-title">
-                        Expense Tracker Dashboard
-                    </h3>
-
-                    <p class="project-description">
-                        Responsive financial dashboard
-                        for tracking income and expenses
-                        with interactive charts and
-                        browser-based storage.
-                    </p>
-
-                    <div class="project-features">
-                        <h4>Key Features:</h4>
-                        <ul class="feature-list">
-                            <li>Income and expense tracking</li>
-                            <li>Expense categorization</li>
-                            <li>Interactive charts</li>
-                            <li>Financial summaries</li>
-                            <li>LocalStorage persistence</li>
-                        </ul>
-                    </div>
-
-                    <div class="project-tech">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Chart.js</span>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- 6. PORTFOLIO -->
-
-            <div class="project-card">
-
-                <div class="project-img"
-                    style="background:linear-gradient(135deg,#667eea,#764ba2)">
-                    <i class="fas fa-laptop-code"></i>
-                </div>
-
-                <div class="project-info">
-
-                    <h3 class="project-title">
-                        Personal Portfolio Website
-                    </h3>
-
-                    <p class="project-description">
-                        Responsive portfolio website
-                        built using HTML, CSS and JavaScript
-                        to showcase projects, skills and experience.
-                    </p>
-
-                    <div class="project-features">
-                        <h4>Key Features:</h4>
-                        <ul class="feature-list">
-                            <li>Responsive design</li>
-                            <li>Light and dark themes</li>
-                            <li>Saved theme preference</li>
-                            <li>Project gallery</li>
-                            <li>Resume download</li>
-                        </ul>
-                    </div>
-
-                    <div class="project-tech">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Responsive Design</span>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- 7. JOHN LEMON -->
-
-            <div class="project-card">
-
-                <div class="project-img"
-                    style="background:linear-gradient(135deg,#f093fb,#f5576c)">
-                    <i class="fas fa-ghost"></i>
-                </div>
-
-                <div class="project-info">
-
-                    <h3 class="project-title">
-                        John Lemon's Haunted Jaunt
-                    </h3>
-
-                    <p class="project-description">
-                        3D maze adventure game developed
-                        in Unity using C#, featuring
-                        navigation, enemy avoidance
-                        and environmental interactions.
-                    </p>
-
-                    <div class="project-features">
-                        <h4>Key Features:</h4>
-                        <ul class="feature-list">
-                            <li>3D player movement</li>
-                            <li>Enemy avoidance</li>
-                            <li>Maze navigation</li>
-                            <li>Triggers and collision mechanics</li>
-                        </ul>
-                    </div>
-
-                    <div class="project-tech">
-                        <span class="tech-tag">Unity</span>
-                        <span class="tech-tag">C#</span>
-                        <span class="tech-tag">3D Game Development</span>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- 8. FLAPPY BIRD -->
-
-            <div class="project-card">
-
-                <div class="project-img"
-                    style="background:linear-gradient(135deg,#4CAF50,#8BC34A)">
-                    <i class="fas fa-dove"></i>
-                </div>
-
-                <div class="project-info">
-
-                    <h3 class="project-title">
-                        Flappy Bird – 2D Game
-                    </h3>
-
-                    <p class="project-description">
-                        2D endless runner game developed
-                        with Unity and C#, featuring
-                        obstacle avoidance and score tracking.
-                    </p>
-
-                    <div class="project-features">
-                        <h4>Key Features:</h4>
-                        <ul class="feature-list">
-                            <li>Player movement controls</li>
-                            <li>Obstacle mechanics</li>
-                            <li>Collision detection</li>
-                            <li>Score tracking</li>
-                        </ul>
-                    </div>
-
-                    <div class="project-tech">
-                        <span class="tech-tag">Unity</span>
-                        <span class="tech-tag">C#</span>
-                        <span class="tech-tag">2D Game Development</span>
-                        <span class="tech-tag">Game Physics</span>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- 9. HOTEL MANAGEMENT -->
-
-            <div class="project-card">
-
-                <div class="project-img"
-                    style="background:linear-gradient(135deg,#4facfe,#00f2fe)">
-                    <i class="fas fa-building"></i>
-                </div>
-
-                <div class="project-info">
-
-                    <h3 class="project-title">
-                        Hotel Management System
-                    </h3>
-
-                    <p class="project-description">
-                        Hotel management application
-                        built using C++ and object-oriented
-                        programming principles.
-                    </p>
-
-                    <div class="project-features">
-                        <h4>Key Features:</h4>
-                        <ul class="feature-list">
-                            <li>Hotel booking management</li>
-                            <li>Check-in and check-out</li>
-                            <li>Payment handling</li>
-                            <li>Object-oriented system design</li>
-                        </ul>
-                    </div>
-
-                    <div class="project-tech">
-                        <span class="tech-tag">C++</span>
-                        <span class="tech-tag">OOP</span>
-                        <span class="tech-tag">System Design</span>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- 10. ELECTION SYSTEM -->
-
-            <div class="project-card">
-
-                <div class="project-img"
-                    style="background:linear-gradient(135deg,#43e97b,#38f9d7)">
-                    <i class="fas fa-vote-yea"></i>
-                </div>
-
-                <div class="project-info">
-
-                    <h3 class="project-title">
-                        Election Voting System
-                    </h3>
-
-                    <p class="project-description">
-                        SQL-based election voting system
-                        implementing authentication,
-                        automated vote counting and
-                        result visualization.
-                    </p>
-
-                    <div class="project-features">
-                        <h4>Key Features:</h4>
-                        <ul class="feature-list">
-                            <li>Vote authentication</li>
-                            <li>Automated counting</li>
-                            <li>Result visualization</li>
-                            <li>Database-backed operations</li>
-                        </ul>
-                    </div>
-
-                    <div class="project-tech">
-                        <span class="tech-tag">SQL</span>
-                        <span class="tech-tag">Database Design</span>
-                        <span class="tech-tag">System Security</span>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- 11. SUDOKU -->
-
-            <div class="project-card">
-
-                <div class="project-img"
-                    style="background:linear-gradient(135deg,#fa709a,#fee140)">
-                    <i class="fas fa-th"></i>
-                </div>
-
-                <div class="project-info">
-
-                    <h3 class="project-title">
-                        Sudoku Game in Assembly
-                    </h3>
-
-                    <p class="project-description">
-                        Sudoku game implemented in
-                        x86 Assembly Language using
-                        BIOS interrupts and direct
-                        video memory manipulation.
-                    </p>
-
-                    <div class="project-features">
-                        <h4>Key Features:</h4>
-                        <ul class="feature-list">
-                            <li>Sudoku puzzle interaction</li>
-                            <li>Puzzle validation</li>
-                            <li>BIOS interrupt handling</li>
-                            <li>Direct video memory access</li>
-                        </ul>
-                    </div>
-
-                    <div class="project-tech">
-                        <span class="tech-tag">Assembly</span>
-                        <span class="tech-tag">x86</span>
-                        <span class="tech-tag">Low-Level Programming</span>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- 12. BINGO -->
-
-            <div class="project-card">
-
-                <div class="project-img"
-                    style="background:linear-gradient(135deg,#a8edea,#b48edf)">
-                    <i class="fas fa-dice"></i>
-                </div>
-
-                <div class="project-info">
-
-                    <h3 class="project-title">
-                        Bingo Game – C++
-                    </h3>
-
-                    <p class="project-description">
-                        Multiplayer Bingo game developed
-                        in C++ featuring interactive
-                        gameplay, dynamic cards
-                        and score tracking.
-                    </p>
-
-                    <div class="project-features">
-                        <h4>Key Features:</h4>
-                        <ul class="feature-list">
-                            <li>Multiplayer gameplay</li>
-                            <li>Dynamic card generation</li>
-                            <li>Real-time score updates</li>
-                            <li>Interactive interface</li>
-                        </ul>
-                    </div>
-
-                    <div class="project-tech">
-                        <span class="tech-tag">C++</span>
-                        <span class="tech-tag">Multiplayer</span>
-                        <span class="tech-tag">Game Development</span>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-<!-- =====================================
-     CONTACT
-===================================== -->
-
-<section id="contact">
-
-    <div class="container">
-
-        <div class="section-title">
-            <h2>Contact Me</h2>
-            <p>
-                Feel free to reach out for opportunities
-                or collaboration
-            </p>
-        </div>
-
-        <div class="contact-info">
-
-            <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fas fa-envelope"></i>
-                </div>
-
-                <h3>Email</h3>
-
-                <a href="mailto:fahad29062003@gmail.com">
-                    fahad29062003@gmail.com
-                </a>
-            </div>
-
-            <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fab fa-github"></i>
-                </div>
-
-                <h3>GitHub</h3>
-
-                <a
-                    href="https://github.com/fahadahmed628"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    github.com/fahadahmed628
-                </a>
-            </div>
-
-            <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fab fa-linkedin"></i>
-                </div>
-
-                <h3>LinkedIn</h3>
-
-                <a
-                    href="https://www.linkedin.com/in/fahad-ahmed-4571a3281/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    View My Profile
-                </a>
-            </div>
-
-            <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fas fa-map-marker-alt"></i>
-                </div>
-
-                <h3>Location</h3>
-                <p>Lahore, Pakistan</p>
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-<!-- =====================================
-     FOOTER
-===================================== -->
-
-<footer>
-
-    <div class="container">
-
-        <div class="logo">Fahad Ahmed</div>
-
-        <p style="margin-top:15px;">
-            Computer Science Student |
-            Software Engineering |
-            Full-Stack, Android &amp; Game Development
-        </p>
-
-        <div class="social-links">
+        <div class="hero-socials">
 
             <a
                 href="https://github.com/fahadahmed628"
-                class="social-link"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
@@ -2083,7 +1187,6 @@ footer .logo {
 
             <a
                 href="https://www.linkedin.com/in/fahad-ahmed-4571a3281/"
-                class="social-link"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
@@ -2093,7 +1196,6 @@ footer .logo {
 
             <a
                 href="https://www.instagram.com/fahad_ahmed_2003/"
-                class="social-link"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -2103,18 +1205,1265 @@ footer .logo {
 
         </div>
 
-        <div class="copyright">
-            &copy; 2026 Fahad Ahmed Portfolio.
-            All Rights Reserved.
+    </div>
+
+    <!-- INTRODUCTION -->
+
+    <div class="hero-content-side">
+
+        <span class="hero-greeting">
+            Hello!
+        </span>
+
+        <h1>
+            <span>My Name is Fahad Ahmed</span>
+        </h1>
+
+        <p class="hero-description">
+
+            I'm a Computer Science undergraduate at
+            <strong>FAST-NUCES, Lahore</strong>,
+            with hands-on experience in
+            <strong>
+                Software Engineering, Full-Stack Web Development,
+                Android Application Development, and Game Development.
+            </strong>
+
+            <br><br>
+
+            Through internships at
+            <strong>Tintash</strong> and
+            <strong>Yorker Marketing Agency</strong>,
+            I've gained practical experience developing
+            interactive games using Unity and C#,
+            as well as building Android applications
+            with Java, XML, and Firebase.
+
+            <br><br>
+
+            My projects include full-stack service marketplaces,
+            Android e-commerce and booking applications,
+            interactive dashboards, and 2D/3D games.
+            I enjoy solving technical challenges,
+            building practical software, and exploring
+            Artificial Intelligence and modern technologies.
+
+        </p>
+
+        <!-- MAIN TECHNICAL SKILLS -->
+
+        <div class="hero-skill-pills">
+
+            <span>REACT</span>
+            <span>TYPESCRIPT</span>
+            <span>JAVASCRIPT</span>
+            <span>FASTAPI</span>
+            <span>TAILWIND CSS</span>
+
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>REST APIs</span>
+
+            <span>ANDROID STUDIO</span>
+            <span>ANDROID SDK</span>
+            <span>JAVA</span>
+            <span>XML</span>
+
+            <span>FIREBASE</span>
+            <span>FIRESTORE</span>
+            <span>SQL</span>
+            <span>SQLITE</span>
+
+            <span>C++</span>
+            <span>C#</span>
+            <span>UNITY</span>
+
+            <span>AWS</span>
+            <span>GIT</span>
+            <span>GITHUB</span>
+            <span>OOP</span>
+            <span>DATA STRUCTURES</span>
+
+        </div>
+
+        <!-- BUTTONS -->
+
+        <div class="hero-buttons">
+
+            <a href="#projects" class="cta-button">
+
+                <i class="fas fa-arrow-right"></i>
+
+                Explore My Projects
+
+            </a>
+
+            <a
+                href="Fahad_Ahmed_Resume.pdf"
+                class="download-button"
+                download="Fahad_Ahmed_Resume.pdf"
+            >
+
+                <i class="fas fa-download"></i>
+
+                Download My Resume
+
+            </a>
+
         </div>
 
     </div>
 
+</div>
+
+</section>
+
+<!-- ==================================
+     RESUME SECTION
+================================== -->
+
+<section id="resume">
+
+<div class="container">
+
+    <div class="section-title">
+
+        <h2>Resume</h2>
+
+        <p>
+            Education, professional experience and achievements
+        </p>
+
+    </div>
+
+    <div class="resume-content">
+
+        <!-- PROFESSIONAL EXPERIENCE -->
+
+        <div class="resume-category">
+
+            <h3>Professional Experience</h3>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+
+                    <div class="timeline-date">
+                        2026
+                    </div>
+
+                    <h4 class="timeline-title">
+                        App Development Intern
+                    </h4>
+
+                    <div class="timeline-company">
+                        Yorker Marketing Agency — Lahore
+                    </div>
+
+                    <ul>
+
+                        <li>
+                            Developed an Android application
+                            for No Filter Coffee.
+                        </li>
+
+                        <li>
+                            Translated business requirements
+                            into mobile application features.
+                        </li>
+
+                        <li>
+                            Designed UI components and implemented
+                            application functionality.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="timeline-item">
+
+                    <div class="timeline-date">
+                        2025
+                    </div>
+
+                    <h4 class="timeline-title">
+                        Game Development Intern
+                    </h4>
+
+                    <div class="timeline-company">
+                        Tintash — Lahore
+                    </div>
+
+                    <ul>
+
+                        <li>
+                            Developed gameplay features
+                            using Unity and C#.
+                        </li>
+
+                        <li>
+                            Worked with 2D and 3D game mechanics.
+                        </li>
+
+                        <li>
+                            Implemented player interactions,
+                            physics and level navigation.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="timeline-item">
+
+                    <div class="timeline-date">
+                        2026
+                    </div>
+
+                    <h4 class="timeline-title">
+                        Campus Ambassador
+                    </h4>
+
+                    <div class="timeline-company">
+                        Safir Tours — Lahore
+                    </div>
+
+                    <ul>
+
+                        <li>
+                            Promoted travel opportunities
+                            and engaged with students.
+                        </li>
+
+                        <li>
+                            Supported outreach initiatives
+                            and student engagement.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- EDUCATION -->
+
+        <div class="resume-category">
+
+            <h3>Education</h3>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+
+                    <div class="timeline-date">
+                        2023 – Present
+                    </div>
+
+                    <h4 class="timeline-title">
+                        BS Computer Science
+                    </h4>
+
+                    <div class="timeline-company">
+                        FAST-NUCES, Lahore
+                    </div>
+
+                    <p>
+                        Focus Areas: Artificial Intelligence,
+                        Full-Stack Development,
+                        Android Development and Game Development.
+                    </p>
+
+                </div>
+
+                <div class="timeline-item">
+
+                    <div class="timeline-date">
+                        2021 – 2023
+                    </div>
+
+                    <h4 class="timeline-title">
+                        A-Levels (1 A* &amp; 2 As)
+                    </h4>
+
+                    <div class="timeline-company">
+                        Beaconhouse School, Lahore
+                    </div>
+
+                    <p>
+                        Awarded a 100% merit scholarship
+                        and Medal of Honor for outstanding
+                        academic performance.
+                    </p>
+
+                </div>
+
+                <div class="timeline-item">
+
+                    <div class="timeline-date">
+                        2019 – 2021
+                    </div>
+
+                    <h4 class="timeline-title">
+                        O-Levels (7 A*)
+                    </h4>
+
+                    <div class="timeline-company">
+                        Beaconhouse School, Lahore
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- LEADERSHIP -->
+
+        <div class="resume-category">
+
+            <h3>Leadership &amp; Activities</h3>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+
+                    <div class="timeline-date">
+                        2022 – 2023
+                    </div>
+
+                    <h4 class="timeline-title">
+                        President — IT &amp; Gaming Society
+                    </h4>
+
+                    <div class="timeline-company">
+                        Beaconhouse A-Levels
+                    </div>
+
+                    <p>
+                        Led society activities and organized
+                        technology-driven events, including
+                        Colosseum, while developing leadership
+                        and team coordination skills.
+                    </p>
+
+                </div>
+
+                <div class="timeline-item">
+
+                    <div class="timeline-date">
+                        2019
+                    </div>
+
+                    <h4 class="timeline-title">
+                        Model United Nations
+                    </h4>
+
+                    <div class="timeline-company">
+                        Beaconhouse School
+                    </div>
+
+                    <p>
+                        Developed public speaking,
+                        critical thinking and diplomacy skills.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- AWS COURSEWORK -->
+
+        <div class="cloud-coursework">
+
+            <h3>AWS Cloud Computing Coursework</h3>
+
+            <p>
+                Completed hands-on AWS coursework
+                involving IAM, EC2, VPC, EBS, Lambda,
+                database services and scalable
+                cloud infrastructure.
+            </p>
+
+            <div class="table-wrap">
+
+                <table class="cloud-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>Lab</th>
+                            <th>Score</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>AWS Lambda Labs</td>
+                            <td>100 / 100</td>
+                        </tr>
+
+                        <tr>
+                            <td>Introduction to AWS IAM</td>
+                            <td>100 / 100</td>
+                        </tr>
+
+                        <tr>
+                            <td>Build a VPC and Web Server</td>
+                            <td>100 / 100</td>
+                        </tr>
+
+                        <tr>
+                            <td>Introduction to Amazon EC2</td>
+                            <td>100 / 100</td>
+                        </tr>
+
+                        <tr>
+                            <td>Working with EBS</td>
+                            <td>100 / 100</td>
+                        </tr>
+
+                        <tr>
+                            <td>Build a Database Server</td>
+                            <td>100 / 100</td>
+                        </tr>
+
+                        <tr>
+                            <td>Scale &amp; Load Balance</td>
+                            <td>100 / 100</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- ==================================
+     PROJECTS
+================================== -->
+
+<section id="projects">
+
+<div class="container">
+
+    <div class="section-title">
+
+        <h2>Projects</h2>
+
+        <p>
+            Applications and software projects I have developed
+        </p>
+
+    </div>
+
+    <div class="projects-grid">
+
+        <!-- 1. FIXIFY -->
+
+        <div class="project-card">
+
+            <div class="project-img"
+                 style="background:linear-gradient(135deg,#667eea,#764ba2)">
+
+                <i class="fas fa-tools"></i>
+
+            </div>
+
+            <div class="project-info">
+
+                <h3 class="project-title">
+                    Fixify – Service Marketplace
+                </h3>
+
+                <p class="project-description">
+                    Full-stack service marketplace connecting
+                    customers with service providers using
+                    React, TypeScript and FastAPI.
+                </p>
+
+                <div class="project-features">
+
+                    <h4>Key Features:</h4>
+
+                    <ul class="feature-list">
+
+                        <li>Customer and provider roles</li>
+                        <li>Service browsing and booking</li>
+                        <li>Appointment scheduling</li>
+                        <li>Real-time communication</li>
+                        <li>Admin dashboard</li>
+                        <li>API-backed functionality</li>
+
+                    </ul>
+
+                </div>
+
+                <div class="project-tech">
+
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">FastAPI</span>
+                    <span class="tech-tag">Tailwind CSS</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 2. FASTMART -->
+
+        <div class="project-card">
+
+            <div class="project-img"
+                 style="background:linear-gradient(135deg,#ff7b36,#f7b733)">
+
+                <i class="fas fa-shopping-cart"></i>
+
+            </div>
+
+            <div class="project-info">
+
+                <h3 class="project-title">
+                    FastMart – E-Commerce App
+                </h3>
+
+                <p class="project-description">
+                    Android e-commerce application developed,
+                    featuring buyer/seller accounts,
+                    Firebase integration and product management.
+                </p>
+
+                <div class="project-features">
+
+                    <h4>Key Features:</h4>
+
+                    <ul class="feature-list">
+
+                        <li>Buyer and seller account roles</li>
+                        <li>Firebase Authentication</li>
+                        <li>Realtime product database</li>
+                        <li>Product listings and management</li>
+                        <li>SQLite cart and favourites</li>
+                        <li>Buyer-seller messaging</li>
+                        <li>Light and dark theme support</li>
+                        <li>MVVM architecture</li>
+
+                    </ul>
+
+                </div>
+
+                <div class="project-tech">
+
+                    <span class="tech-tag">Android Studio</span>
+                    <span class="tech-tag">Java</span>
+                    <span class="tech-tag">XML</span>
+                    <span class="tech-tag">Firebase</span>
+                    <span class="tech-tag">SQLite</span>
+                    <span class="tech-tag">MVVM</span>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 3. NO FILTER COFFEE -->
+
+        <div class="project-card">
+
+            <div class="project-img"
+                 style="background:linear-gradient(135deg,#6f4e37,#c49a6c)">
+
+                <i class="fas fa-mug-hot"></i>
+
+            </div>
+
+            <div class="project-info">
+
+                <h3 class="project-title">
+                    No Filter Coffee Shop App
+                </h3>
+
+                <p class="project-description">
+                    Android coffee shop application developed
+                    with Java, XML and Firebase, focusing on
+                    product browsing and customer ordering workflows.
+                </p>
+
+                <div class="project-features">
+
+                    <h4>Key Features:</h4>
+
+                    <ul class="feature-list">
+
+                        <li>Coffee product browsing</li>
+                        <li>Product selection</li>
+                        <li>Customer ordering workflow</li>
+                        <li>Interactive Android screens</li>
+                        <li>Mobile navigation and UI design</li>
+
+                    </ul>
+
+                </div>
+
+                <div class="project-tech">
+
+                    <span class="tech-tag">Android Studio</span>
+                    <span class="tech-tag">Java</span>
+                    <span class="tech-tag">XML</span>
+                    <span class="tech-tag">Firebase</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 4. PELAGIA -->
+
+        <div class="project-card">
+
+            <div class="project-img"
+                 style="background:linear-gradient(135deg,#187b9d,#54c6ca)">
+
+                <i class="fas fa-hotel"></i>
+
+            </div>
+
+            <div class="project-info">
+
+                <h3 class="project-title">
+                    Pelagia Hotel Booking App
+                </h3>
+
+                <p class="project-description">
+                    Android hotel booking application with
+                    authentication, hotel listings, booking
+                    workflows and Firebase-backed
+                    reservation management.
+                </p>
+
+                <div class="project-features">
+
+                    <h4>Key Features:</h4>
+
+                    <ul class="feature-list">
+
+                        <li>User authentication</li>
+                        <li>Hotel listings and room details</li>
+                        <li>Booking workflows</li>
+                        <li>Firestore reservation management</li>
+
+                    </ul>
+
+                </div>
+
+                <div class="project-tech">
+
+                    <span class="tech-tag">Android</span>
+                    <span class="tech-tag">Java</span>
+                    <span class="tech-tag">XML</span>
+                    <span class="tech-tag">Firebase</span>
+                    <span class="tech-tag">Firestore</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 5. EXPENSE TRACKER -->
+
+        <div class="project-card">
+
+            <div class="project-img"
+                 style="background:linear-gradient(135deg,#4CAF50,#8BC34A)">
+
+                <i class="fas fa-chart-line"></i>
+
+            </div>
+
+            <div class="project-info">
+
+                <h3 class="project-title">
+                    Expense Tracker Dashboard
+                </h3>
+
+                <p class="project-description">
+                    Responsive financial dashboard for tracking
+                    income and expenses, featuring interactive
+                    charts and browser-based data storage.
+                </p>
+
+                <div class="project-features">
+
+                    <h4>Key Features:</h4>
+
+                    <ul class="feature-list">
+
+                        <li>Income and expense tracking</li>
+                        <li>Expense categorization</li>
+                        <li>Interactive charts</li>
+                        <li>Financial summaries</li>
+                        <li>LocalStorage persistence</li>
+
+                    </ul>
+
+                </div>
+
+                <div class="project-tech">
+
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">CSS</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Chart.js</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 6. PERSONAL PORTFOLIO -->
+
+        <div class="project-card">
+
+            <div class="project-img"
+                 style="background:linear-gradient(135deg,#667eea,#764ba2)">
+
+                <i class="fas fa-laptop-code"></i>
+
+            </div>
+
+            <div class="project-info">
+
+                <h3 class="project-title">
+                    Personal Portfolio Website
+                </h3>
+
+                <p class="project-description">
+                    Responsive portfolio website built using
+                    HTML, CSS and JavaScript to showcase
+                    projects, skills and experience.
+                </p>
+
+                <div class="project-features">
+
+                    <h4>Key Features:</h4>
+
+                    <ul class="feature-list">
+
+                        <li>Responsive design</li>
+                        <li>Light and dark themes</li>
+                        <li>Saved theme preference</li>
+                        <li>Project gallery</li>
+                        <li>Resume download</li>
+
+                    </ul>
+
+                </div>
+
+                <div class="project-tech">
+
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">CSS</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Responsive Design</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 7. JOHN LEMON -->
+
+        <div class="project-card">
+
+            <div class="project-img"
+                 style="background:linear-gradient(135deg,#f093fb,#f5576c)">
+
+                <i class="fas fa-ghost"></i>
+
+            </div>
+
+            <div class="project-info">
+
+                <h3 class="project-title">
+                    John Lemon's Haunted Jaunt
+                </h3>
+
+                <p class="project-description">
+                    3D maze adventure game developed in Unity
+                    using C#, featuring navigation, enemy
+                    avoidance and environmental interactions.
+                </p>
+
+                <div class="project-features">
+
+                    <h4>Key Features:</h4>
+
+                    <ul class="feature-list">
+
+                        <li>3D player movement</li>
+                        <li>Enemy avoidance</li>
+                        <li>Maze navigation</li>
+                        <li>Triggers and collision mechanics</li>
+
+                    </ul>
+
+                </div>
+
+                <div class="project-tech">
+
+                    <span class="tech-tag">Unity</span>
+                    <span class="tech-tag">C#</span>
+                    <span class="tech-tag">3D Game Development</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 8. FLAPPY BIRD -->
+
+        <div class="project-card">
+
+            <div class="project-img"
+                 style="background:linear-gradient(135deg,#4CAF50,#8BC34A)">
+
+                <i class="fas fa-dove"></i>
+
+            </div>
+
+            <div class="project-info">
+
+                <h3 class="project-title">
+                    Flappy Bird – 2D Game
+                </h3>
+
+                <p class="project-description">
+                    2D endless runner game developed with
+                    Unity and C#, featuring obstacle avoidance
+                    and score tracking.
+                </p>
+
+                <div class="project-features">
+
+                    <h4>Key Features:</h4>
+
+                    <ul class="feature-list">
+
+                        <li>Player movement controls</li>
+                        <li>Obstacle mechanics</li>
+                        <li>Collision detection</li>
+                        <li>Score tracking</li>
+
+                    </ul>
+
+                </div>
+
+                <div class="project-tech">
+
+                    <span class="tech-tag">Unity</span>
+                    <span class="tech-tag">C#</span>
+                    <span class="tech-tag">2D Game Development</span>
+                    <span class="tech-tag">Game Physics</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 9. HOTEL MANAGEMENT -->
+
+        <div class="project-card">
+
+            <div class="project-img"
+                 style="background:linear-gradient(135deg,#4facfe,#00f2fe)">
+
+                <i class="fas fa-building"></i>
+
+            </div>
+
+            <div class="project-info">
+
+                <h3 class="project-title">
+                    Hotel Management System
+                </h3>
+
+                <p class="project-description">
+                    Hotel management application built
+                    using C++ and object-oriented programming principles.
+                </p>
+
+                <div class="project-features">
+
+                    <h4>Key Features:</h4>
+
+                    <ul class="feature-list">
+
+                        <li>Hotel booking management</li>
+                        <li>Check-in and check-out</li>
+                        <li>Payment handling</li>
+                        <li>Object-oriented system design</li>
+
+                    </ul>
+
+                </div>
+
+                <div class="project-tech">
+
+                    <span class="tech-tag">C++</span>
+                    <span class="tech-tag">OOP</span>
+                    <span class="tech-tag">System Design</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 10. ELECTION VOTING -->
+
+        <div class="project-card">
+
+            <div class="project-img"
+                 style="background:linear-gradient(135deg,#43e97b,#38f9d7)">
+
+                <i class="fas fa-vote-yea"></i>
+
+            </div>
+
+            <div class="project-info">
+
+                <h3 class="project-title">
+                    Election Voting System
+                </h3>
+
+                <p class="project-description">
+                    SQL-based election voting system implementing
+                    authentication, automated vote counting
+                    and result visualization.
+                </p>
+
+                <div class="project-features">
+
+                    <h4>Key Features:</h4>
+
+                    <ul class="feature-list">
+
+                        <li>Vote authentication</li>
+                        <li>Automated counting</li>
+                        <li>Result visualization</li>
+                        <li>Database-backed operations</li>
+
+                    </ul>
+
+                </div>
+
+                <div class="project-tech">
+
+                    <span class="tech-tag">SQL</span>
+                    <span class="tech-tag">Database Design</span>
+                    <span class="tech-tag">System Security</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 11. SUDOKU -->
+
+        <div class="project-card">
+
+            <div class="project-img"
+                 style="background:linear-gradient(135deg,#fa709a,#fee140)">
+
+                <i class="fas fa-th"></i>
+
+            </div>
+
+            <div class="project-info">
+
+                <h3 class="project-title">
+                    Sudoku Game in Assembly
+                </h3>
+
+                <p class="project-description">
+                    Sudoku game implemented in x86 Assembly
+                    Language using BIOS interrupts and direct
+                    video memory manipulation.
+                </p>
+
+                <div class="project-features">
+
+                    <h4>Key Features:</h4>
+
+                    <ul class="feature-list">
+
+                        <li>Sudoku puzzle interaction</li>
+                        <li>Puzzle validation</li>
+                        <li>BIOS interrupt handling</li>
+                        <li>Direct video memory access</li>
+
+                    </ul>
+
+                </div>
+
+                <div class="project-tech">
+
+                    <span class="tech-tag">Assembly</span>
+                    <span class="tech-tag">x86</span>
+                    <span class="tech-tag">Low-Level Programming</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 12. BINGO -->
+
+        <div class="project-card">
+
+            <div class="project-img"
+                 style="background:linear-gradient(135deg,#a8edea,#b48edf)">
+
+                <i class="fas fa-dice"></i>
+
+            </div>
+
+            <div class="project-info">
+
+                <h3 class="project-title">
+                    Bingo Game – C++
+                </h3>
+
+                <p class="project-description">
+                    Multiplayer Bingo game developed in C++
+                    with interactive gameplay, dynamic cards
+                    and score tracking.
+                </p>
+
+                <div class="project-features">
+
+                    <h4>Key Features:</h4>
+
+                    <ul class="feature-list">
+
+                        <li>Multiplayer gameplay</li>
+                        <li>Dynamic card generation</li>
+                        <li>Real-time score updates</li>
+                        <li>Interactive interface</li>
+
+                    </ul>
+
+                </div>
+
+                <div class="project-tech">
+
+                    <span class="tech-tag">C++</span>
+                    <span class="tech-tag">Multiplayer</span>
+                    <span class="tech-tag">Game Development</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- ==================================
+     CONTACT SECTION
+================================== -->
+
+<section id="contact">
+
+<div class="container">
+
+    <div class="section-title">
+
+        <h2>Contact Me</h2>
+
+        <p>
+            Feel free to reach out for opportunities or collaboration
+        </p>
+
+    </div>
+
+    <div class="contact-info">
+
+        <div class="contact-item">
+
+            <div class="contact-icon">
+
+                <i class="fas fa-envelope"></i>
+
+            </div>
+
+            <h3>Email</h3>
+
+            <a href="mailto:fahad29062003@gmail.com">
+                fahad29062003@gmail.com
+            </a>
+
+        </div>
+
+        <div class="contact-item">
+
+            <div class="contact-icon">
+
+                <i class="fab fa-github"></i>
+
+            </div>
+
+            <h3>GitHub</h3>
+
+            <a
+                href="https://github.com/fahadahmed628"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                github.com/fahadahmed628
+            </a>
+
+        </div>
+
+        <div class="contact-item">
+
+            <div class="contact-icon">
+
+                <i class="fab fa-linkedin"></i>
+
+            </div>
+
+            <h3>LinkedIn</h3>
+
+            <a
+                href="https://www.linkedin.com/in/fahad-ahmed-4571a3281/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                View My Profile
+            </a>
+
+        </div>
+
+        <div class="contact-item">
+
+            <div class="contact-icon">
+
+                <i class="fas fa-map-marker-alt"></i>
+
+            </div>
+
+            <h3>Location</h3>
+
+            <p>
+                Lahore, Pakistan
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- ==================================
+     FOOTER
+================================== -->
+
+<footer>
+
+<div class="container">
+
+    <div class="logo">
+        Fahad Ahmed
+    </div>
+
+    <p style="margin-top:15px;">
+
+        Computer Science Student |
+        Software Engineering |
+        Full-Stack, Android &amp; Game Development
+
+    </p>
+
+    <div class="social-links">
+
+        <a
+            href="https://github.com/fahadahmed628"
+            class="social-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+        >
+            <i class="fab fa-github"></i>
+        </a>
+
+        <a
+            href="https://www.linkedin.com/in/fahad-ahmed-4571a3281/"
+            class="social-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+        >
+            <i class="fab fa-linkedin"></i>
+        </a>
+
+        <a
+            href="https://www.instagram.com/fahad_ahmed_2003/"
+            class="social-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+        >
+            <i class="fab fa-instagram"></i>
+        </a>
+
+    </div>
+
+    <div class="copyright">
+
+        &copy; 2026 Fahad Ahmed Portfolio.
+        All Rights Reserved.
+
+    </div>
+
+</div>
+
 </footer>
 
-<!-- =====================================
+<!-- ==================================
      JAVASCRIPT
-===================================== -->
+================================== -->
 
 <script>
 
@@ -2127,17 +2476,15 @@ const htmlElement =
     document.documentElement;
 
 const themeStorageKey =
-    "fahad-portfolio-theme-v2";
+    "fahad-theme-v3";
 
-// Synchronize the toggle with the actual theme.
 themeToggle.checked =
     htmlElement.getAttribute("data-theme") === "dark";
 
 themeToggle.addEventListener("change", function () {
 
-    const selectedTheme = this.checked
-        ? "dark"
-        : "light";
+    const selectedTheme =
+        this.checked ? "dark" : "light";
 
     htmlElement.setAttribute(
         "data-theme",
@@ -2145,12 +2492,16 @@ themeToggle.addEventListener("change", function () {
     );
 
     try {
+
         localStorage.setItem(
             themeStorageKey,
             selectedTheme
         );
+
     } catch (error) {
-        // Theme switching still works without storage.
+
+        // Theme switching works even if storage is blocked.
+
     }
 
 });
@@ -2174,6 +2525,7 @@ function closeMobileMenu() {
 
     mobileMenuBtn.innerHTML =
         '<i class="fas fa-bars"></i>';
+
 }
 
 mobileMenuBtn.addEventListener("click", function () {
@@ -2192,7 +2544,6 @@ mobileMenuBtn.addEventListener("click", function () {
 
 });
 
-// Close after clicking navigation links.
 document.querySelectorAll(".nav-links a").forEach(link => {
 
     link.addEventListener(
@@ -2202,7 +2553,6 @@ document.querySelectorAll(".nav-links a").forEach(link => {
 
 });
 
-// Close when switching from mobile to desktop.
 window.addEventListener("resize", function () {
 
     if (window.innerWidth > 768) {
@@ -2211,7 +2561,6 @@ window.addEventListener("resize", function () {
 
 });
 
-// Close menu using Escape.
 document.addEventListener("keydown", function (event) {
 
     if (event.key === "Escape") {
