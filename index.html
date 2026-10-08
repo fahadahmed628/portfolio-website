@@ -1,2258 +1,1265 @@
+
 <!DOCTYPE html>
-
-<html lang="en">
-
+<html lang="en" data-theme="dark">
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Fahad Ahmed - Portfolio</title>
+    <meta name="description" content="Fahad Ahmed - Computer Science student at FAST-NUCES, specializing in software engineering, full-stack, Android, and game development.">
+    <meta name="theme-color" content="#121212">
+    <title>Fahad Ahmed | Portfolio</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Apply saved theme before the page renders -->
+    <script>
+        (function () {
+            try {
+                const theme = localStorage.getItem('theme') || 'dark';
+                document.documentElement.setAttribute(
+                    'data-theme',
+                    theme === 'light' ? 'light' : 'dark'
+                );
+            } catch (error) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+
     <style>
-
-        /* CSS Variables for Themes */
-
         :root {
-
-            /* Light Theme (Current) */
-
             --primary-color: #3498db;
-
             --secondary-color: #2c3e50;
-
             --background-color: #f8f9fa;
-
             --surface-color: #ffffff;
-
             --text-color: #333333;
-
             --text-light: #666666;
-
             --shadow-color: rgba(0, 0, 0, 0.1);
-
             --border-color: #eaeaea;
-
             --hero-bg: #ffffff;
-
             --hero-text-color: #333333;
-
             --skill-tag-bg: #e8f4fc;
-
-            --skill-tag-color: #3498db;
-
+            --skill-tag-color: #2479b5;
             --project-card-bg: #ffffff;
-
             --timeline-line: #3498db;
-
             --timeline-dot: #3498db;
-
             --table-header-bg: #3498db;
-
             --table-header-color: #ffffff;
-
             --table-row-hover: #f5f9ff;
-
             --contact-item-bg: #ffffff;
-
             --footer-bg: #2c3e50;
-
             --footer-text: #ffffff;
-
             --nav-bg: #ffffff;
-
             --nav-shadow: 0 2px 10px rgba(0,0,0,0.1);
-
             --transition-speed: 0.3s;
-
         }
-
-
 
         [data-theme="dark"] {
-
-            /* Dark Theme */
-
             --primary-color: #4dabf7;
-
             --secondary-color: #ffffff;
-
             --background-color: #121212;
-
             --surface-color: #1e1e1e;
-
             --text-color: #ffffff;
-
             --text-light: #cccccc;
-
             --shadow-color: rgba(0, 0, 0, 0.3);
-
             --border-color: #333333;
-
             --hero-bg: #1a1a1a;
-
             --hero-text-color: #ffffff;
-
             --skill-tag-bg: #2d3748;
-
             --skill-tag-color: #90cdf4;
-
             --project-card-bg: #1a1a1a;
-
             --timeline-line: #4dabf7;
-
             --timeline-dot: #4dabf7;
-
             --table-header-bg: #2d3748;
-
             --table-header-color: #ffffff;
-
             --table-row-hover: #2d3748;
-
             --contact-item-bg: #1a1a1a;
-
             --footer-bg: #0a0a0a;
-
             --footer-text: #e0e0e0;
-
             --nav-bg: #1a1a1a;
-
             --nav-shadow: 0 2px 10px rgba(0,0,0,0.3);
-
         }
-
-
-
-        /* RESET & BASE */
 
         * {
-
             margin: 0;
-
             padding: 0;
-
             box-sizing: border-box;
-
-            transition: background-color var(--transition-speed),&#x20;
-
-                        color var(--transition-speed),
-
-                        border-color var(--transition-speed),
-
-                        box-shadow var(--transition-speed);
-
         }
 
-
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
-
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
             line-height: 1.6;
-
             color: var(--text-color);
-
             background: var(--background-color);
-
         }
 
+        body, nav, section, .project-card, .contact-item,
+        .cloud-coursework, footer, .skill-tag {
+            transition:
+                background-color var(--transition-speed),
+                color var(--transition-speed),
+                border-color var(--transition-speed);
+        }
 
+        a {
+            color: inherit;
+        }
 
         .container {
-
             max-width: 1200px;
-
             margin: 0 auto;
-
             padding: 0 20px;
-
         }
-
-
 
         /* NAVIGATION */
-
         nav {
-
             background: var(--nav-bg);
-
             box-shadow: var(--nav-shadow);
-
             position: fixed;
-
             width: 100%;
-
             top: 0;
-
             z-index: 1000;
-
         }
-
-
 
         .nav-container {
-
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
-
             padding: 15px 0;
-
         }
-
-
 
         .logo {
-
             font-size: 1.8rem;
-
             font-weight: 700;
-
             color: var(--secondary-color);
-
             text-decoration: none;
-
         }
-
-
-
-        [data-theme="dark"] .logo {
-
-            color: #ffffff;
-
-        }
-
-
 
         .nav-right {
-
             display: flex;
-
             align-items: center;
-
             gap: 20px;
-
         }
-
-
-
-        /* Theme Toggle Switch */
-
-        .theme-toggle {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 10px;
-
-            cursor: pointer;
-
-        }
-
-
-
-        .theme-label {
-
-            font-size: 0.9rem;
-
-            color: var(--text-color);
-
-            font-weight: 500;
-
-        }
-
-
-
-        .theme-switch {
-
-            position: relative;
-
-            display: inline-block;
-
-            width: 60px;
-
-            height: 30px;
-
-        }
-
-
-
-        .theme-switch input {
-
-            opacity: 0;
-
-            width: 0;
-
-            height: 0;
-
-        }
-
-
-
-        .theme-slider {
-
-            position: absolute;
-
-            cursor: pointer;
-
-            top: 0;
-
-            left: 0;
-
-            right: 0;
-
-            bottom: 0;
-
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-
-            transition: .4s;
-
-            border-radius: 34px;
-
-        }
-
-
-
-        [data-theme="dark"] .theme-slider {
-
-            background: linear-gradient(90deg, #4dabf7 0%, #1971c2 100%);
-
-        }
-
-
-
-        .theme-slider:before {
-
-            position: absolute;
-
-            content: "";
-
-            height: 22px;
-
-            width: 22px;
-
-            left: 4px;
-
-            bottom: 4px;
-
-            background-color: white;
-
-            transition: .4s;
-
-            border-radius: 50%;
-
-        }
-
-
-
-        input:checked + .theme-slider:before {
-
-            transform: translateX(30px);
-
-        }
-
-
 
         .nav-links {
-
             display: flex;
-
             list-style: none;
-
             gap: 30px;
-
         }
-
-
 
         .nav-links a {
-
             text-decoration: none;
-
             color: var(--text-color);
-
             font-weight: 500;
-
             transition: color 0.3s;
-
-            position: relative;
-
         }
-
-
 
         .nav-links a:hover {
-
             color: var(--primary-color);
-
         }
 
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
+        .theme-label {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            font-weight: 500;
+        }
 
-        .nav-links a::after {
+        .theme-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
 
-            content: '';
-
-            position: absolute;
-
-            bottom: -5px;
-
-            left: 0;
-
+        .theme-switch input {
+            opacity: 0;
             width: 0;
-
-            height: 2px;
-
-            background: var(--primary-color);
-
-            transition: width 0.3s;
-
+            height: 0;
         }
 
-
-
-        .nav-links a:hover::after {
-
-            width: 100%;
-
+        .theme-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 34px;
+            transition: 0.4s;
         }
 
+        [data-theme="dark"] .theme-slider {
+            background: linear-gradient(90deg, #4dabf7, #1971c2);
+        }
 
+        .theme-slider::before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            border-radius: 50%;
+            transition: 0.4s;
+        }
+
+        input:checked + .theme-slider::before {
+            transform: translateX(30px);
+        }
+
+        .theme-switch input:focus-visible + .theme-slider {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 3px;
+        }
 
         .mobile-menu-btn {
-
             display: none;
-
-            font-size: 1.5rem;
-
             background: none;
-
             border: none;
-
+            color: var(--text-color);
+            font-size: 1.5rem;
             cursor: pointer;
-
-            color: var(--secondary-color);
-
-        }  &#x20;
-
-
-
-        /* HERO SECTION - PLAIN BACKGROUND */
-
-        .hero {
-
-            padding: 180px 0 100px;
-
-            background: var(--hero-bg);
-
-            color: var(--hero-text-color);
-
-            text-align: center;
-
-            margin-top: 0;
-
-            min-height: 60vh;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
         }
 
-
+        /* HERO */
+        .hero {
+            padding: 180px 0 100px;
+            background: var(--hero-bg);
+            color: var(--hero-text-color);
+            text-align: center;
+            min-height: 65vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
         .hero h1 {
-
             font-size: 3.5rem;
-
             margin-bottom: 20px;
-
             font-weight: 700;
-
-            color: var(--hero-text-color);
-
         }
-
-
 
         .hero p {
-
             font-size: 1.3rem;
-
-            max-width: 600px;
-
-            margin: 0 auto 40px;
-
-            color: var(--hero-text-color);
-
+            max-width: 750px;
+            margin: 0 auto 35px;
             opacity: 0.9;
-
         }
-
-
 
         .hero-buttons {
-
             display: flex;
-
             gap: 20px;
-
             justify-content: center;
-
             flex-wrap: wrap;
-
-            margin-top: 30px;
-
         }
 
-
+        .cta-button,
+        .download-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 34px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
 
         .cta-button {
-
-            display: inline-flex;
-
-            align-items: center;
-
-            gap: 10px;
-
             background: var(--primary-color);
-
-            color: white;
-
-            padding: 15px 35px;
-
-            border-radius: 30px;
-
-            text-decoration: none;
-
-            font-weight: 600;
-
-            font-size: 1.1rem;
-
-            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
-
+            color: #ffffff;
         }
-
-
-
-        .cta-button:hover {
-
-            transform: translateY(-3px);
-
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-
-            background-color: #2980b9;
-
-        }
-
-
-
-        [data-theme="dark"] .cta-button:hover {
-
-            background-color: #1971c2;
-
-        }
-
-
 
         .download-button {
-
-            display: inline-flex;
-
-            align-items: center;
-
-            gap: 10px;
-
-            background: transparent;
-
             color: var(--primary-color);
-
-            padding: 14px 34px;
-
-            border-radius: 30px;
-
-            text-decoration: none;
-
-            font-weight: 600;
-
-            font-size: 1.1rem;
-
-            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
-
             border: 2px solid var(--primary-color);
-
+            background: transparent;
         }
 
-
-
+        .cta-button:hover,
         .download-button:hover {
-
             transform: translateY(-3px);
-
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-
-            background-color: rgba(52, 152, 219, 0.1);
-
+            box-shadow: 0 10px 20px var(--shadow-color);
         }
 
-
-
-        [data-theme="dark"] .download-button {
-
-            color: #4dabf7;
-
-            border-color: #4dabf7;
-
-        }
-
-
-
-        [data-theme="dark"] .download-button:hover {
-
-            background-color: rgba(77, 171, 247, 0.1);
-
-        }
-
-
-
-        /* SECTIONS */
-
+        /* SECTION STYLES */
         section {
-
-            padding: 100px 0;
-
+            padding: 90px 0;
             scroll-margin-top: 80px;
-
         }
-
-
 
         section:nth-child(even) {
-
             background: var(--surface-color);
-
         }
-
-
 
         .section-title {
-
             text-align: center;
-
             margin-bottom: 50px;
-
         }
-
-
 
         .section-title h2 {
-
             font-size: 2.5rem;
-
             color: var(--secondary-color);
-
-            margin-bottom: 15px;
-
-            position: relative;
-
+            margin-bottom: 18px;
             display: inline-block;
-
+            position: relative;
         }
-
-
 
         .section-title h2::after {
-
-            content: '';
-
+            content: "";
             position: absolute;
-
-            bottom: -10px;
-
+            bottom: -8px;
             left: 50%;
-
             transform: translateX(-50%);
-
             width: 60px;
-
             height: 4px;
-
             background: var(--primary-color);
-
             border-radius: 2px;
-
         }
-
-
 
         .section-title p {
-
             color: var(--text-light);
-
-            max-width: 600px;
-
-            margin: 0 auto;
-
         }
 
-
-
-        /* ABOUT SECTION */
-
-        #about {
-
-            padding-top: 120px;
-
-        }
-
-
-
+        /* ABOUT */
         .about-content {
-
             display: grid;
-
             grid-template-columns: 1fr 2fr;
-
             gap: 50px;
-
             align-items: center;
-
         }
-
-
 
         .profile-img {
-
             width: 100%;
-
             border-radius: 20px;
-
             box-shadow: 0 10px 30px var(--shadow-color);
-
         }
-
-
 
         .about-text h3 {
-
             font-size: 1.8rem;
-
             margin-bottom: 20px;
-
             color: var(--secondary-color);
-
         }
 
-
+        .about-text p {
+            margin-bottom: 17px;
+            color: var(--text-color);
+        }
 
         .skills {
-
             display: flex;
-
             flex-wrap: wrap;
-
-            gap: 15px;
-
-            margin-top: 30px;
-
+            gap: 12px;
+            margin-top: 25px;
         }
-
-
 
         .skill-tag {
-
             background: var(--skill-tag-bg);
-
             color: var(--skill-tag-color);
-
-            padding: 8px 20px;
-
+            padding: 7px 16px;
             border-radius: 30px;
-
             font-size: 0.9rem;
-
             font-weight: 500;
-
         }
 
-
-
-        /* RESUME SECTION */
-
+        /* RESUME / EXPERIENCE */
         .resume-content {
-
             max-width: 1000px;
-
             margin: 0 auto;
-
         }
 
+        .resume-category {
+            margin-bottom: 50px;
+        }
 
+        .resume-category h3 {
+            font-size: 1.7rem;
+            color: var(--secondary-color);
+            margin-bottom: 25px;
+        }
 
         .timeline {
-
             position: relative;
-
             padding-left: 30px;
-
+            border-left: 2px solid var(--timeline-line);
         }
-
-
-
-        .timeline::before {
-
-            content: '';
-
-            position: absolute;
-
-            left: 0;
-
-            top: 0;
-
-            bottom: 0;
-
-            width: 2px;
-
-            background: var(--timeline-line);
-
-        }
-
-
 
         .timeline-item {
-
             position: relative;
-
-            margin-bottom: 40px;
-
-            padding-left: 30px;
-
+            margin-bottom: 35px;
+            padding-left: 20px;
         }
-
-
 
         .timeline-item::before {
-
-            content: '';
-
+            content: "";
             position: absolute;
-
-            left: -38px;
-
-            top: 5px;
-
+            left: -37px;
+            top: 7px;
             width: 12px;
-
             height: 12px;
-
-            border-radius: 50%;
-
             background: var(--timeline-dot);
-
             border: 3px solid var(--surface-color);
-
-            box-shadow: 0 0 0 3px var(--timeline-dot);
-
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px var(--timeline-dot);
         }
-
-
 
         .timeline-date {
-
             color: var(--primary-color);
-
             font-weight: 600;
-
             margin-bottom: 5px;
-
         }
-
-
 
         .timeline-title {
-
-            font-size: 1.3rem;
-
-            margin-bottom: 10px;
-
+            font-size: 1.25rem;
             color: var(--secondary-color);
-
+            margin-bottom: 5px;
         }
-
-
 
         .timeline-company {
-
             color: var(--text-light);
-
-            margin-bottom: 10px;
-
             font-style: italic;
-
+            margin-bottom: 10px;
         }
 
+        .timeline-item ul {
+            padding-left: 20px;
+        }
 
+        .timeline-item li {
+            margin-bottom: 5px;
+        }
 
-        /* CLOUD COURSEWORK SECTION */
-
+        /* CLOUD COURSEWORK */
         .cloud-coursework {
-
-            margin-top: 60px;
-
             background: var(--background-color);
-
             padding: 30px;
-
-            border-radius: 10px;
-
+            border-radius: 12px;
+            margin-top: 30px;
             box-shadow: 0 5px 15px var(--shadow-color);
-
         }
 
+        .cloud-coursework h3 {
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
 
+        .cloud-coursework p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
 
         .cloud-table {
-
             width: 100%;
-
             border-collapse: collapse;
-
-            margin-top: 20px;
-
             background: var(--surface-color);
-
-            border-radius: 8px;
-
             overflow: hidden;
-
-            box-shadow: 0 3px 10px var(--shadow-color);
-
         }
-
-
 
         .cloud-table th {
-
             background: var(--table-header-bg);
-
             color: var(--table-header-color);
-
-            padding: 15px;
-
+            padding: 13px;
             text-align: left;
-
-            font-weight: 600;
-
         }
-
-
 
         .cloud-table td {
-
-            padding: 15px;
-
+            padding: 13px;
             border-bottom: 1px solid var(--border-color);
-
         }
 
-
-
-        .cloud-table tr:last-child td {
-
-            border-bottom: none;
-
-        }
-
-
-
-        .cloud-table tr:hover {
-
-            background: var(--table-row-hover);
-
-        }
-
-
-
-        .score-high {
-
-            color: #27ae60;
-
-            font-weight: 600;
-
-        }
-
-
-
-        .score-medium {
-
-            color: #f39c12;
-
-            font-weight: 600;
-
-        }
-
-
-
-        /* PROJECTS SECTION */
-
+        /* PROJECT CARDS */
         .projects-grid {
-
             display: grid;
-
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-
             gap: 30px;
-
+            align-items: stretch;
         }
-
-
 
         .project-card {
-
             background: var(--project-card-bg);
-
-            border-radius: 10px;
-
+            border-radius: 12px;
             overflow: hidden;
-
             box-shadow: 0 5px 15px var(--shadow-color);
-
             transition: transform 0.3s, box-shadow 0.3s;
-
         }
-
-
 
         .project-card:hover {
-
-            transform: translateY(-10px);
-
+            transform: translateY(-7px);
             box-shadow: 0 15px 30px var(--shadow-color);
-
         }
-
-
 
         .project-img {
-
-            width: 100%;
-
-            height: 200px;
-
-            object-fit: cover;
-
+            height: 190px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            font-size: 4rem;
         }
-
-
 
         .project-info {
-
             padding: 25px;
-
         }
-
-
 
         .project-title {
-
             font-size: 1.3rem;
-
-            margin-bottom: 10px;
-
             color: var(--secondary-color);
-
+            margin-bottom: 12px;
         }
-
-
 
         .project-description {
-
             color: var(--text-light);
-
-            margin-bottom: 20px;
-
+            margin-bottom: 18px;
             font-size: 0.95rem;
-
         }
-
-
 
         .project-features {
-
-            margin: 15px 0;
-
+            margin: 15px 0 20px;
         }
 
-
+        .project-features h4 {
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
 
         .feature-list {
-
             list-style: none;
-
-            padding-left: 0;
-
         }
-
-
 
         .feature-list li {
-
-            margin-bottom: 8px;
-
-            padding-left: 20px;
-
             position: relative;
-
-            color: var(--text-color);
-
+            padding-left: 20px;
+            margin-bottom: 8px;
+            font-size: 0.92rem;
         }
 
-
-
-        .feature-list li:before {
-
+        .feature-list li::before {
             content: "✓";
-
             position: absolute;
-
             left: 0;
-
             color: #27ae60;
-
             font-weight: bold;
-
         }
-
-
 
         .project-tech {
-
             display: flex;
-
             flex-wrap: wrap;
-
-            gap: 10px;
-
-            margin-bottom: 20px;
-
+            gap: 8px;
+            margin-top: 20px;
         }
-
-
 
         .tech-tag {
-
-            background: #f1f8ff;
-
-            color: #0366d6;
-
+            background: var(--skill-tag-bg);
+            color: var(--skill-tag-color);
             padding: 5px 12px;
-
             border-radius: 15px;
-
             font-size: 0.8rem;
-
             font-weight: 500;
-
         }
 
-
-
-        [data-theme="dark"] .tech-tag {
-
-            background: #2d3748;
-
-            color: #90cdf4;
-
-        }
-
-
-
-        .tech-tag.aws {
-
-            background: #ff9900;
-
-            color: white;
-
-        }
-
-
-
-        .tech-tag.react {
-
-            background: #61dafb;
-
-            color: #282c34;
-
-        }
-
-
-
-        .tech-tag.ts {
-
-            background: #007acc;
-
-            color: white;
-
-        }
-
-
-
-        /* CONTACT SECTION */
-
+        /* CONTACT */
         .contact-content {
-
-            max-width: 600px;
-
+            max-width: 950px;
             margin: 0 auto;
-
-            text-align: center;
-
         }
-
-
 
         .contact-info {
-
             display: grid;
-
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-
-            gap: 30px;
-
-            margin-top: 40px;
-
+            gap: 25px;
         }
-
-
 
         .contact-item {
-
             background: var(--contact-item-bg);
-
-            padding: 30px;
-
-            border-radius: 10px;
-
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
             box-shadow: 0 5px 15px var(--shadow-color);
-
-            transition: transform 0.3s;
-
         }
-
-
-
-        .contact-item:hover {
-
-            transform: translateY(-5px);
-
-        }
-
-
 
         .contact-icon {
-
             font-size: 2rem;
-
             color: var(--primary-color);
-
             margin-bottom: 15px;
-
         }
-
-
 
         .contact-item h3 {
-
             margin-bottom: 10px;
-
             color: var(--secondary-color);
-
         }
-
-
 
         .contact-item a {
-
-            color: var(--text-color);
-
             text-decoration: none;
-
-            transition: color 0.3s;
-
+            overflow-wrap: anywhere;
         }
-
-
 
         .contact-item a:hover {
-
             color: var(--primary-color);
-
         }
-
-
 
         /* FOOTER */
-
         footer {
-
             background: var(--footer-bg);
-
             color: var(--footer-text);
-
-            padding: 60px 0 30px;
-
+            padding: 50px 0 25px;
             text-align: center;
-
         }
 
-
+        footer .logo {
+            color: var(--footer-text);
+        }
 
         .social-links {
-
             display: flex;
-
             justify-content: center;
-
-            gap: 20px;
-
-            margin: 30px 0;
-
+            gap: 25px;
+            margin: 25px 0;
         }
-
-
 
         .social-link {
-
             color: var(--footer-text);
-
             font-size: 1.5rem;
-
             transition: transform 0.3s, color 0.3s;
-
         }
-
-
 
         .social-link:hover {
-
-            transform: translateY(-5px);
-
+            transform: translateY(-4px);
             color: var(--primary-color);
-
         }
-
-
 
         .copyright {
-
-            margin-top: 30px;
-
+            border-top: 1px solid rgba(255,255,255,0.15);
             padding-top: 20px;
-
-            border-top: 1px solid rgba(255,255,255,0.1);
-
-            color: rgba(255,255,255,0.7);
-
+            margin-top: 25px;
+            color: var(--footer-text);
             font-size: 0.9rem;
-
         }
 
-
-
-        /* RESPONSIVE DESIGN - MOBILE FIXES */
-
+        /* RESPONSIVE DESIGN */
         @media (max-width: 768px) {
-
             .nav-container {
-
                 padding: 12px 0;
-
             }
-
-
 
             .nav-links {
-
                 display: none;
-
                 position: absolute;
-
                 top: 100%;
-
                 left: 0;
-
                 width: 100%;
-
-                background: var(--nav-bg);
-
                 flex-direction: column;
-
-                padding: 20px;
-
-                box-shadow: 0 5px 15px var(--shadow-color);
-
-                z-index: 1000;
-
+                gap: 0;
+                padding: 10px 20px;
+                background: var(--nav-bg);
+                box-shadow: var(--nav-shadow);
             }
-
-
 
             .nav-links.active {
-
                 display: flex;
-
             }
 
-
+            .nav-links li a {
+                display: block;
+                padding: 12px 0;
+            }
 
             .mobile-menu-btn {
-
                 display: block;
-
             }
-
-
-
-            .hero {
-
-                padding: 140px 0 60px;
-
-                margin-top: 0;
-
-                min-height: 50vh;
-
-            }
-
-
-
-            .hero h1 {
-
-                font-size: 2.5rem;
-
-                line-height: 1.2;
-
-            }
-
-
-
-            .hero p {
-
-                font-size: 1.1rem;
-
-                padding: 0 15px;
-
-            }
-
-
-
-            .hero-buttons {
-
-                flex-direction: column;
-
-                align-items: center;
-
-                gap: 15px;
-
-            }
-
-
-
-            .cta-button, .download-button {
-
-                width: 80%;
-
-                max-width: 300px;
-
-                justify-content: center;
-
-            }
-
-
-
-            section {
-
-                padding: 80px 0;
-
-                scroll-margin-top: 70px;
-
-            }
-
-
-
-            #about {
-
-                padding-top: 100px;
-
-            }
-
-
-
-            .about-content {
-
-                grid-template-columns: 1fr;
-
-                text-align: center;
-
-                gap: 30px;
-
-            }
-
-
-
-            .section-title h2 {
-
-                font-size: 2rem;
-
-            }
-
-
-
-            .section-title p {
-
-                padding: 0 15px;
-
-            }
-
-
-
-            .cloud-table {
-
-                display: block;
-
-                overflow-x: auto;
-
-            }
-
-
 
             .theme-label {
-
                 display: none;
-
             }
-
-
-
-            .theme-switch {
-
-                width: 50px;
-
-                height: 25px;
-
-            }
-
-
-
-            .theme-slider:before {
-
-                height: 18px;
-
-                width: 18px;
-
-                left: 3px;
-
-                bottom: 3px;
-
-            }
-
-
-
-            input:checked + .theme-slider:before {
-
-                transform: translateX(25px);
-
-            }
-
-
-
-            .projects-grid {
-
-                gap: 25px;
-
-            }
-
-
-
-            .contact-info {
-
-                grid-template-columns: 1fr;
-
-                gap: 20px;
-
-            }
-
-
-
-            .contact-item {
-
-                padding: 20px;
-
-            }
-
-        }
-
-
-
-        @media (max-width: 480px) {
 
             .hero {
-
-                padding: 120px 0 50px;
-
-                min-height: 40vh;
-
+                padding: 140px 0 70px;
+                min-height: 55vh;
             }
-
-
 
             .hero h1 {
-
-                font-size: 2rem;
-
+                font-size: 2.5rem;
             }
-
-
 
             .hero p {
-
-                font-size: 1rem;
-
+                font-size: 1.1rem;
             }
 
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
 
-
-            .cta-button, .download-button {
-
-                padding: 12px 25px;
-
-                font-size: 1rem;
-
+            .cta-button,
+            .download-button {
                 width: 90%;
-
+                max-width: 320px;
             }
-
-
 
             section {
-
-                padding: 70px 0;
-
+                padding: 75px 0;
+                scroll-margin-top: 70px;
             }
 
-
-
-            #about {
-
-                padding-top: 90px;
-
-            }
-
-
-
-            .projects-grid {
-
+            .about-content {
                 grid-template-columns: 1fr;
-
+                gap: 30px;
             }
 
-
-
-            .cloud-table th, .cloud-table td {
-
-                padding: 10px 5px;
-
-                font-size: 0.9rem;
-
+            .profile-img-container {
+                max-width: 320px;
+                margin: 0 auto;
             }
-
-
-
-            .nav-container {
-
-                padding: 10px 0;
-
-            }
-
-
-
-            .logo {
-
-                font-size: 1.5rem;
-
-            }
-
-        }
-
-
-
-        /* Very small devices */
-
-        @media (max-width: 360px) {
-
-            .hero {
-
-                padding: 110px 0 40px;
-
-            }
-
-
-
-            .hero h1 {
-
-                font-size: 1.8rem;
-
-            }
-
-
-
-            .hero p {
-
-                font-size: 0.95rem;
-
-            }
-
-
 
             .section-title h2 {
-
-                font-size: 1.8rem;
-
+                font-size: 2rem;
             }
 
-
-
-            .container {
-
-                padding: 0 15px;
-
+            .cloud-coursework {
+                overflow-x: auto;
             }
 
+            .cloud-table {
+                min-width: 450px;
+            }
         }
 
-    </style>
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.4rem;
+            }
 
+            .nav-right {
+                gap: 12px;
+            }
+
+            .theme-switch {
+                width: 50px;
+                height: 26px;
+            }
+
+            .theme-slider::before {
+                width: 18px;
+                height: 18px;
+            }
+
+            input:checked + .theme-slider::before {
+                transform: translateX(24px);
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *, *::before, *::after {
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
     <!-- NAVIGATION -->
-
     <nav>
-
         <div class="container nav-container">
-
             <a href="#hero" class="logo">Fahad Ahmed</a>
 
             <div class="nav-right">
-
                 <div class="theme-toggle">
-
                     <span class="theme-label">Theme</span>
 
-                    <label class="theme-switch">
-
-                        <input type="checkbox" id="theme-toggle">
-
+                    <label class="theme-switch" aria-label="Toggle dark mode">
+                        <input type="checkbox" id="theme-toggle"
+                               aria-label="Dark mode">
                         <span class="theme-slider"></span>
-
                     </label>
-
                 </div>
 
-                <ul class="nav-links">
-
+                <ul class="nav-links" id="nav-links">
                     <li><a href="#about">About</a></li>
-
                     <li><a href="#resume">Resume</a></li>
-
                     <li><a href="#projects">Projects</a></li>
-
                     <li><a href="#contact">Contact</a></li>
-
                 </ul>
 
-                <button class="mobile-menu-btn">
-
+                <button class="mobile-menu-btn"
+                        id="mobile-menu-btn"
+                        aria-label="Toggle navigation"
+                        aria-expanded="false"
+                        aria-controls="nav-links">
                     <i class="fas fa-bars"></i>
-
                 </button>
-
             </div>
-
         </div>
-
     </nav>
 
+    <!-- HERO -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <h1>Fahad Ahmed</h1>
 
+            <p>
+                Computer Science Student at FAST-NUCES |
+                Software Engineering | Full-Stack, Android &
+                Game Development
+            </p>
 
-<!-- HERO SECTION - PLAIN BACKGROUND -->
+            <div class="hero-buttons">
+                <a href="#about" class="cta-button">
+                    <i class="fas fa-arrow-right"></i>
+                    Explore My Portfolio
+                </a>
 
-<section id="hero" class="hero">
-
-    <div class="container">
-
-        <h1>Fahad Ahmed</h1>
-
-        <p>Computer Science student specializing in AI, web and game development</p>
-
-        <div class="hero-buttons">
-
-            <a href="#about" class="cta-button">
-
-                <i class="fas fa-arrow-right"></i> Explore My Portfolio
-
-            </a>
-
-            <!-- Method 1: Direct download with all attributes -->
-
-            <a href="Fahad_Ahmed_Resume.pdf"&#x20;
-
-               class="download-button"&#x20;
-
-               download="Fahad_Ahmed_Resume"
-
-               target="_blank"
-
-               rel="noopener noreferrer">
-
-                <i class="fas fa-download"></i> Download My Resume
-
-            </a>
-
+                <a href="Fahad_Ahmed_Resume.pdf"
+                   class="download-button"
+                   download="Fahad_Ahmed_Resume.pdf">
+                    <i class="fas fa-download"></i>
+                    Download My Resume
+                </a>
+            </div>
         </div>
+    </section>
 
-    </div>
-
-</section>
-
-
-
-    <!-- Rest of your HTML code remains the same... -->
-
-    <!-- ABOUT SECTION -->
-
+    <!-- ABOUT -->
     <section id="about">
-
         <div class="container">
 
             <div class="section-title">
-
                 <h2>About Me</h2>
-
-                <p>Computer Science student specializing in AI, web and game development</p>
-
+                <p>Get to know more about my background and skills</p>
             </div>
 
             <div class="about-content">
-
                 <div class="profile-img-container">
-
-                    <img src="myPic.jpg" alt="Fahad Ahmed" class="profile-img">
-
+                    <img src="myPic.jpg"
+                         alt="Portrait of Fahad Ahmed"
+                         class="profile-img">
                 </div>
 
                 <div class="about-text">
-
                     <h3>Professional Profile</h3>
 
-                    <p>Computer Science student specializing in AI, web and game development. Skilled in C++, Unity (3D & 2D) and SQL with hands-on experience in building interactive games, database systems, and algorithmic solutions. Passionate about AI, R&D, and prompt engineering, with a focus on developing scalable, efficient, and user-driven applications.</p>
+                    <p>
+                        I'm a Computer Science undergraduate at
+                        FAST-NUCES, Lahore, with hands-on experience
+                        in Software Engineering, Full-Stack
+                        Development, Android Application Development,
+                        and Game Development.
+                    </p>
 
+                    <p>
+                        During my internship at Tintash, I worked
+                        with Unity and C# to develop interactive
+                        2D and 3D gameplay features. At Yorker
+                        Marketing Agency, I developed Android
+                        application functionality for No Filter
+                        Coffee, focusing on user interfaces,
+                        navigation, and business requirements.
+                    </p>
 
+                    <p>
+                        My projects include Fixify, a full-stack
+                        service marketplace built with React,
+                        TypeScript, and FastAPI; Pelagia, an Android
+                        hotel booking application using Firebase;
+                        and several interactive games and web
+                        applications.
+                    </p>
+
+                    <p>
+                        I enjoy solving technical problems, exploring
+                        new technologies, and building applications
+                        that deliver practical value. I'm also
+                        interested in Artificial Intelligence and
+                        Machine Learning, and I'm continuously
+                        developing my knowledge in these areas.
+                    </p>
+
+                    <h3>Technical Skills</h3>
 
                     <div class="skills">
-
-                        <span class="skill-tag">JavaScript</span>
-
                         <span class="skill-tag">C++</span>
-
-                        <span class="skill-tag">Unity</span>
-
-                        <span class="skill-tag">SQL</span>
-
-                        <span class="skill-tag">AWS Cloud</span>
-
-                        <span class="skill-tag">Game Development</span>
-
-                        <span class="skill-tag">Web Development</span>
-
-                        <span class="skill-tag">Data Structures</span>
-
-                        <span class="skill-tag">HTML</span>
-
-                        <span class="skill-tag">CSS</span>
-
-                        <span class="skill-tag">OOP</span>
-
-                        <span class="skill-tag">Assembly Language</span>
-
+                        <span class="skill-tag">Java</span>
                         <span class="skill-tag">C#</span>
-
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">FastAPI</span>
+                        <span class="skill-tag">Tailwind CSS</span>
+                        <span class="skill-tag">HTML</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">Android Studio</span>
+                        <span class="skill-tag">Android SDK</span>
+                        <span class="skill-tag">React Native</span>
+                        <span class="skill-tag">Firebase</span>
+                        <span class="skill-tag">Firestore</span>
+                        <span class="skill-tag">REST APIs</span>
+                        <span class="skill-tag">Unity 2D/3D</span>
+                        <span class="skill-tag">Game Development</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">GitHub</span>
+                        <span class="skill-tag">Data Structures</span>
+                        <span class="skill-tag">OOP</span>
                         <span class="skill-tag">Database Design</span>
-
+                        <span class="skill-tag">Assembly Language</span>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
     </section>
 
-
-
-    <!-- RESUME SECTION -->
-
+    <!-- RESUME -->
     <section id="resume">
-
         <div class="container">
 
             <div class="section-title">
-
                 <h2>Resume</h2>
-
-                <p>My education, experience and achievements</p>
-
+                <p>My education, professional experience, and achievements</p>
             </div>
 
             <div class="resume-content">
 
-                <div class="timeline">
+                <!-- EXPERIENCE -->
+                <div class="resume-category">
+                    <h3>Professional Experience</h3>
 
-                    <div class="timeline-item">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">2026</div>
+                            <h4 class="timeline-title">
+                                App Development Intern
+                            </h4>
+                            <div class="timeline-company">
+                                Yorker Marketing Agency — Lahore, Pakistan
+                            </div>
+                            <ul>
+                                <li>
+                                    Developed an Android application
+                                    for No Filter Coffee, translating
+                                    business requirements into
+                                    mobile features.
+                                </li>
+                                <li>
+                                    Designed UI components and
+                                    implemented application
+                                    functionality while collaborating
+                                    with the development team.
+                                </li>
+                            </ul>
+                        </div>
 
-                        <div class="timeline-date">Current</div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2025</div>
+                            <h4 class="timeline-title">
+                                Game Development Intern
+                            </h4>
+                            <div class="timeline-company">
+                                Tintash — Lahore, Pakistan
+                            </div>
+                            <ul>
+                                <li>
+                                    Developed gameplay features
+                                    using Unity and C# for
+                                    interactive 2D and 3D game
+                                    systems.
+                                </li>
+                                <li>
+                                    Worked on game mechanics,
+                                    physics, scene design,
+                                    player interactions, and
+                                    level navigation.
+                                </li>
+                            </ul>
+                        </div>
 
-                        <h3 class="timeline-title">Bachelor of Science in Computer Science</h3>
-
-                        <div class="timeline-company">FAST NUCES LAHORE</div>
-
-                        <p>Specializing in AI and Game Development</p>
-
+                        <div class="timeline-item">
+                            <div class="timeline-date">2026</div>
+                            <h4 class="timeline-title">
+                                Campus Ambassador
+                            </h4>
+                            <div class="timeline-company">
+                                Safir Tours — Lahore, Pakistan
+                            </div>
+                            <ul>
+                                <li>
+                                    Promoted travel opportunities
+                                    and engaged with students
+                                    across campus.
+                                </li>
+                                <li>
+                                    Supported student outreach
+                                    initiatives and increased
+                                    awareness of tour programs.
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-
-
-
-                    <div class="timeline-item">
-
-                        <div class="timeline-date">2021-2023</div>
-
-                        <h3 class="timeline-title">A-Levels (1A* & 2As)</h3>
-
-                        <div class="timeline-company">Beaconhouse School Lahore</div>
-
-                        <p>Received Merit Scholarship with 100% tuition waiver and medal of honor for exceptional results</p>
-
-                    </div>
-
-
-
-                    <div class="timeline-item">
-
-                        <div class="timeline-date">2019-2021</div>
-
-                        <h3 class="timeline-title">O-Levels (7A*)</h3>
-
-                        <div class="timeline-company">Beaconhouse School Lahore</div>
-
-                        <p>Outstanding academic performance with all A* grades</p>
-
-                    </div>
-
-
-
-                    <div class="timeline-item">
-
-                        <div class="timeline-date">2025</div>
-
-                        <h3 class="timeline-title">Game Development Intern</h3>
-
-                        <div class="timeline-company">Tintash</div>
-
-                        <p>Worked on game features in Unity and C#, collaborating on game development and creating several games.</p>
-
-                    </div>
-
-
-
-                    <div class="timeline-item">
-
-                        <div class="timeline-date">2022-2023</div>
-
-                        <h3 class="timeline-title">IT & Gaming Society President</h3>
-
-                        <div class="timeline-company">A-Levels</div>
-
-                        <p>Led the IT & Gaming Society, organized 3 tech-driven events like Colosseum, and honed leadership skills.</p>
-
-                    </div>
-
-
-
-                    <div class="timeline-item">
-
-                        <div class="timeline-date">2020</div>
-
-                        <h3 class="timeline-title">Model United Nations</h3>
-
-                        <div class="timeline-company">O-Levels</div>
-
-                        <p>Participated in Model United Nation 2019, enhancing public speaking, critical thinking, and diplomacy skills.</p>
-
-                    </div>
-
                 </div>
 
+                <!-- EDUCATION -->
+                <div class="resume-category">
+                    <h3>Education</h3>
 
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">2023 – Present</div>
+                            <h4 class="timeline-title">
+                                Bachelor of Science in Computer Science
+                            </h4>
+                            <div class="timeline-company">
+                                FAST-NUCES, Lahore
+                            </div>
+                            <p>
+                                Focus Areas: Artificial Intelligence,
+                                Full-Stack Development, Android
+                                Development, and Game Development.
+                            </p>
+                        </div>
 
-                <!-- Cloud Computing Coursework -->
+                        <div class="timeline-item">
+                            <div class="timeline-date">2021 – 2023</div>
+                            <h4 class="timeline-title">
+                                A-Levels (1 A* & 2 As)
+                            </h4>
+                            <div class="timeline-company">
+                                Beaconhouse School, Lahore
+                            </div>
+                            <p>
+                                Awarded a 100% merit scholarship
+                                and Medal of Honor for outstanding
+                                academic performance.
+                            </p>
+                        </div>
 
+                        <div class="timeline-item">
+                            <div class="timeline-date">2019 – 2021</div>
+                            <h4 class="timeline-title">
+                                O-Levels (7 A*)
+                            </h4>
+                            <div class="timeline-company">
+                                Beaconhouse School, Lahore
+                            </div>
+                            <p>
+                                Achieved 7 A* grades.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LEADERSHIP -->
+                <div class="resume-category">
+                    <h3>Leadership & Activities</h3>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">2022 – 2023</div>
+                            <h4 class="timeline-title">
+                                President — IT & Gaming Society
+                            </h4>
+                            <div class="timeline-company">
+                                Beaconhouse A-Levels
+                            </div>
+                            <p>
+                                Led society activities and organized
+                                technology-driven events, including
+                                Colosseum, while managing logistics,
+                                team coordination, and student
+                                engagement.
+                            </p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">2019</div>
+                            <h4 class="timeline-title">
+                                Model United Nations
+                            </h4>
+                            <div class="timeline-company">
+                                Beaconhouse School
+                            </div>
+                            <p>
+                                Participated in Model United Nations,
+                                strengthening public speaking,
+                                critical thinking, and diplomacy skills.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AWS COURSEWORK -->
                 <div class="cloud-coursework">
+                    <h3>AWS Cloud Computing Coursework</h3>
 
-                    <h3 style="color: var(--secondary-color); margin-bottom: 15px;">AWS Cloud Computing Coursework</h3>
-
-                    <p style="margin-bottom: 20px; color: var(--text-light);">Successfully completed Cloud Computing coursework, gaining hands-on experience with core AWS services including IAM, EC2, VPC, EBS, Lambda, Elastic Beanstalk, databases, and scalable architectures. This journey strengthened my understanding of cloud infrastructure, security, and real-world deployment practices.</p>
-
-
+                    <p>
+                        Completed practical cloud computing coursework
+                        covering AWS IAM, EC2, VPC, EBS, Lambda,
+                        databases, and scalable infrastructure.
+                        Achieved full marks across the recorded labs.
+                    </p>
 
                     <table class="cloud-table">
-
                         <thead>
-
                             <tr>
-
-                                <th>Lab Name</th>
-
-                                <th>Due Date</th>
-
-                                <th>Submitted</th>
-
-                                <th>Status</th>
-
+                                <th>Coursework / Lab</th>
                                 <th>Score</th>
-
                             </tr>
-
                         </thead>
 
                         <tbody>
-
                             <tr>
-
                                 <td>AWS Lambda Labs</td>
-
-                                <td>Nov 1 at 8:49pm</td>
-
-                                <td>✓</td>
-
-                                <td>Completed</td>
-
-                                <td class="score-high">100 / 100</td>
-
+                                <td>100 / 100</td>
                             </tr>
-
                             <tr>
-
-                                <td>Introduction to AWS IAM Labs</td>
-
-                                <td>Nov 4 at 3:59pm</td>
-
-                                <td>✓</td>
-
-                                <td>Completed</td>
-
-                                <td class="score-high">100 / 100</td>
-
+                                <td>Introduction to AWS IAM</td>
+                                <td>100 / 100</td>
                             </tr>
-
                             <tr>
-
-                                <td>Build your VPC and Launch a Web Server</td>
-
-                                <td>Nov 7 at 11:38pm</td>
-
-                                <td>✓</td>
-
-                                <td>Completed</td>
-
-                                <td class="score-high">100 / 100</td>
-
+                                <td>Build a VPC and Launch a Web Server</td>
+                                <td>100 / 100</td>
                             </tr>
-
                             <tr>
-
-                                <td>Introduction to Amazon EC2 Labs</td>
-
-                                <td>Nov 15 at 4:57pm</td>
-
-                                <td>✓</td>
-
-                                <td>Completed</td>
-
-                                <td class="score-high">100 / 100</td>
-
+                                <td>Introduction to Amazon EC2</td>
+                                <td>100 / 100</td>
                             </tr>
-
                             <tr>
-
-                                <td>Working with EBS Labs</td>
-
-                                <td>Nov 21 at 9:21pm</td>
-
-                                <td>✓</td>
-
-                                <td>Completed</td>
-
-                                <td class="score-high">100 / 100</td>
-
+                                <td>Working with EBS</td>
+                                <td>100 / 100</td>
                             </tr>
-
                             <tr>
-
-                                <td>Build a Database Server Labs</td>
-
-                                <td>Nov 27 at 4:37pm</td>
-
-                                <td>✓</td>
-
-                                <td>Completed</td>
-
-                                <td class="score-high">100 / 100</td>
-
+                                <td>Build a Database Server</td>
+                                <td>100 / 100</td>
                             </tr>
-
                             <tr>
-
-                                <td>Scale & Load Balance your Architecture</td>
-
-                                <td>Nov 30 at 6:13pm</td>
-
-                                <td>✓</td>
-
-                                <td>Completed</td>
-
-                                <td class="score-high">100 / 100</td>
-
+                                <td>Scale & Load Balance Architecture</td>
+                                <td>100 / 100</td>
                             </tr>
-
                         </tbody>
-
                     </table>
-
                 </div>
 
             </div>
-
         </div>
-
     </section>
 
-
-
-    <!-- PROJECTS SECTION -->
-
+    <!-- PROJECTS -->
     <section id="projects">
-
         <div class="container">
 
             <div class="section-title">
-
                 <h2>Projects</h2>
-
-                <p>My portfolio of completed projects</p>
-
+                <p>Applications and projects I have developed</p>
             </div>
 
             <div class="projects-grid">
 
-                <!-- Fixify Project -->
-
+                <!-- FIXIFY -->
                 <div class="project-card">
-
-                    <div class="project-img" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white;">
-
-                        <i class="fas fa-tools" style="font-size: 4rem;"></i>
-
+                    <div class="project-img"
+                         style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-tools"></i>
                     </div>
 
                     <div class="project-info">
+                        <h3 class="project-title">
+                            Fixify – Service Marketplace
+                        </h3>
 
-                        <h3 class="project-title">Fixify - Service Marketplace</h3>
-
-                        <p class="project-description">A complete marketplace that enables real-world communication between customers and verified service providers, making home services smoother, faster, and more reliable.</p>
-
-
+                        <p class="project-description">
+                            A full-stack service marketplace
+                            connecting customers with service
+                            providers through digital booking
+                            and management workflows.
+                        </p>
 
                         <div class="project-features">
-
-                            <h4 style="margin-bottom: 10px; color: var(--secondary-color);">Key Features:</h4>
-
+                            <h4>Key Features:</h4>
                             <ul class="feature-list">
-
-                                <li>Browse and book services (cleaning, electrical, plumbing, etc.)</li>
-
-                                <li>Schedule appointments with preferred date/time</li>
-
-                                <li>Real-time communication between users and providers</li>
-
-                                <li>Dark/Light mode toggle</li>
-
-                                <li>Admin dashboard with analytics</li>
-
-                                <li>Reviews and ratings system</li>
-
+                                <li>Customer and provider roles</li>
+                                <li>Service browsing and bookings</li>
+                                <li>Appointment scheduling</li>
+                                <li>Real-time communication</li>
+                                <li>Administrative dashboard</li>
+                                <li>API-backed application logic</li>
                             </ul>
-
                         </div>
-
-
 
                         <div class="project-tech">
-
-                            <span class="tech-tag react">React 18</span>
-
-                            <span class="tech-tag ts">TypeScript</span>
-
-                            <span class="tech-tag">Tailwind CSS</span>
-
-                            <span class="tech-tag">Vite</span>
-
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">TypeScript</span>
                             <span class="tech-tag">FastAPI</span>
-
+                            <span class="tech-tag">Tailwind CSS</span>
                         </div>
-
                     </div>
-
                 </div>
 
-
-
-                <!-- No Filter Coffee Shop App -->
+                <!-- NO FILTER COFFEE -->
                 <div class="project-card">
-                    <div class="project-img" style="background: linear-gradient(135deg, #6f4e37 0%, #c49a6c 100%); display: flex; align-items: center; justify-content: center; color: white;">
-                        <i class="fas fa-mug-hot" style="font-size: 4rem;"></i>
+                    <div class="project-img"
+                         style="background: linear-gradient(135deg, #6f4e37, #c49a6c);">
+                        <i class="fas fa-mug-hot"></i>
                     </div>
+
                     <div class="project-info">
-                        <h3 class="project-title">No Filter Coffee Shop App</h3>
-                        <p class="project-description">An Android coffee shop app developed using Java, XML, and Firebase, supporting product browsing, coffee selection, and customer ordering workflows.</p>
+                        <h3 class="project-title">
+                            No Filter Coffee Shop App
+                        </h3>
+
+                        <p class="project-description">
+                            An Android coffee shop application
+                            developed using Java, XML, and Firebase,
+                            focused on product browsing and
+                            customer ordering workflows.
+                        </p>
+
                         <div class="project-features">
-                            <h4 style="margin-bottom: 10px; color: var(--secondary-color);">Key Features:</h4>
+                            <h4>Key Features:</h4>
                             <ul class="feature-list">
-                                <li>Browse coffee products and available selections</li>
+                                <li>Coffee product browsing</li>
+                                <li>Product selection</li>
                                 <li>Customer ordering workflow</li>
-                                <li>Interactive Android screens and app navigation</li>
-                                <li>UI/UX designed for a straightforward customer experience</li>
+                                <li>Interactive Android screens</li>
+                                <li>Mobile navigation and UI design</li>
                             </ul>
                         </div>
+
                         <div class="project-tech">
                             <span class="tech-tag">Android Studio</span>
                             <span class="tech-tag">Java</span>
@@ -2262,23 +1269,37 @@
                     </div>
                 </div>
 
-                <!-- Pelagia Hotel Booking App -->
+                <!-- PELAGIA -->
                 <div class="project-card">
-                    <div class="project-img" style="background: linear-gradient(135deg, #187b9d 0%, #54c6ca 100%); display: flex; align-items: center; justify-content: center; color: white;">
-                        <i class="fas fa-hotel" style="font-size: 4rem;"></i>
+                    <div class="project-img"
+                         style="background: linear-gradient(135deg, #187b9d, #54c6ca);">
+                        <i class="fas fa-hotel"></i>
                     </div>
+
                     <div class="project-info">
-                        <h3 class="project-title">Pelagia Hotel Booking App</h3>
-                        <p class="project-description">A full-stack Android hotel booking app built with Java, XML, and Firebase, featuring authentication, hotel exploration, and Firestore-backed reservations.</p>
+                        <h3 class="project-title">
+                            Pelagia Hotel Booking App
+                        </h3>
+
+                        <p class="project-description">
+                            A full-stack Android hotel booking
+                            application with authentication,
+                            hotel listings, booking workflows,
+                            and Firebase-backed reservation
+                            management.
+                        </p>
+
                         <div class="project-features">
-                            <h4 style="margin-bottom: 10px; color: var(--secondary-color);">Key Features:</h4>
+                            <h4>Key Features:</h4>
                             <ul class="feature-list">
                                 <li>User authentication</li>
-                                <li>Hotel listings and room details</li>
-                                <li>Booking and reservation workflow</li>
-                                <li>Firestore-backed reservation management</li>
+                                <li>Hotel listings</li>
+                                <li>Room details</li>
+                                <li>Booking workflows</li>
+                                <li>Firestore reservation management</li>
                             </ul>
                         </div>
+
                         <div class="project-tech">
                             <span class="tech-tag">Android</span>
                             <span class="tech-tag">Java</span>
@@ -2289,630 +1310,485 @@
                     </div>
                 </div>
 
-                <!-- Expense Tracker Dashboard -->
-
+                <!-- EXPENSE TRACKER -->
                 <div class="project-card">
-
-                    <div class="project-img" style="background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%); display: flex; align-items: center; justify-content: center; color: white;">
-
-                        <i class="fas fa-chart-line" style="font-size: 4rem;"></i>
-
+                    <div class="project-img"
+                         style="background: linear-gradient(135deg, #4CAF50, #8BC34A);">
+                        <i class="fas fa-chart-line"></i>
                     </div>
 
                     <div class="project-info">
+                        <h3 class="project-title">
+                            Expense Tracker Dashboard
+                        </h3>
 
-                        <h3 class="project-title">Expense Tracker Dashboard</h3>
-
-                        <p class="project-description">A comprehensive financial management application built with HTML, CSS, and JavaScript that helps users track income and expenses with detailed analytics and visual reports.</p>
-
-
+                        <p class="project-description">
+                            A responsive financial dashboard
+                            for managing income and expenses,
+                            with interactive visualizations and
+                            browser-based data persistence.
+                        </p>
 
                         <div class="project-features">
-
-                            <h4 style="margin-bottom: 10px; color: var(--secondary-color);">Key Features:</h4>
-
+                            <h4>Key Features:</h4>
                             <ul class="feature-list">
-
-                                <li>Add, edit, and delete income/expense transactions</li>
-
-                                <li>Categorize expenses (Food, Transport, Entertainment, etc.)</li>
-
-                                <li>Real-time balance calculation and updates</li>
-
-                                <li>Interactive charts and visual data representation</li>
-
-                                <li>Monthly/yearly expense analysis</li>
-
-                                <li>LocalStorage for data persistence</li>
-
+                                <li>Income and expense tracking</li>
+                                <li>Expense categorization</li>
+                                <li>Interactive charts</li>
+                                <li>Financial summaries</li>
+                                <li>LocalStorage persistence</li>
                             </ul>
-
                         </div>
 
-
-
                         <div class="project-tech">
-
-                            <span class="tech-tag">HTML5</span>
-
-                            <span class="tech-tag">CSS3</span>
-
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
                             <span class="tech-tag">JavaScript</span>
-
                             <span class="tech-tag">Chart.js</span>
-
-                            <span class="tech-tag">LocalStorage API</span>
-
                         </div>
-
                     </div>
-
                 </div>
 
-
-
-                <!-- Personal Portfolio Website -->
-
+                <!-- PERSONAL PORTFOLIO -->
                 <div class="project-card">
-
-                    <div class="project-img" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white;">
-
-                        <i class="fas fa-laptop-code" style="font-size: 4rem;"></i>
-
+                    <div class="project-img"
+                         style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-laptop-code"></i>
                     </div>
 
                     <div class="project-info">
+                        <h3 class="project-title">
+                            Personal Portfolio Website
+                        </h3>
 
-                        <h3 class="project-title">Personal Portfolio Website</h3>
-
-                        <p class="project-description">A responsive, modern portfolio website built from scratch using HTML, CSS, and JavaScript to showcase projects, skills, and professional experience with smooth animations and interactivity.</p>
-
-
+                        <p class="project-description">
+                            A responsive portfolio website
+                            built with HTML, CSS, and JavaScript
+                            to showcase my technical skills,
+                            experience, and projects.
+                        </p>
 
                         <div class="project-features">
-
-                            <h4 style="margin-bottom: 10px; color: var(--secondary-color);">Key Features:</h4>
-
+                            <h4>Key Features:</h4>
                             <ul class="feature-list">
-
-                                <li>Fully responsive design (mobile, tablet, desktop)</li>
-
-                                <li>Dark/Light mode toggle functionality</li>
-
-                                <li>Smooth scrolling navigation with active states</li>
-
-                                <li>Interactive project gallery with filtering</li>
-
-                                <li>Contact form with validation</li>
-
-                                <li>Performance optimized with minimal dependencies</li>
-
+                                <li>Responsive layout</li>
+                                <li>Dark and light themes</li>
+                                <li>Persistent theme preference</li>
+                                <li>Project gallery</li>
+                                <li>Resume download functionality</li>
+                                <li>Contact and social links</li>
                             </ul>
-
                         </div>
 
-
-
                         <div class="project-tech">
-
-                            <span class="tech-tag">HTML5</span>
-
-                            <span class="tech-tag">CSS3</span>
-
-                            <span class="tech-tag">JavaScript (ES6+)</span>
-
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
                             <span class="tech-tag">Responsive Design</span>
-
-                            <span class="tech-tag">CSS Animations</span>
-
                         </div>
-
                     </div>
-
                 </div>
 
-
-
-                <!-- John Lemon's Haunted Jaunt -->
-
+                <!-- JOHN LEMON -->
                 <div class="project-card">
-
-                    <div class="project-img" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); display: flex; align-items: center; justify-content: center; color: white;">
-
-                        <i class="fas fa-ghost" style="font-size: 4rem;"></i>
-
+                    <div class="project-img"
+                         style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                        <i class="fas fa-ghost"></i>
                     </div>
 
                     <div class="project-info">
+                        <h3 class="project-title">
+                            John Lemon's Haunted Jaunt
+                        </h3>
 
-                        <h3 class="project-title">John Lemon's Haunted Jaunt</h3>
+                        <p class="project-description">
+                            A 3D maze adventure game developed
+                            in Unity using C#, involving player
+                            navigation, environmental interaction,
+                            and enemy avoidance.
+                        </p>
 
-                        <p class="project-description">Developed a 3D maze adventure game in Unity using C#, implementing player movement, environment interaction, and level design.</p>
+                        <div class="project-features">
+                            <h4>Key Features:</h4>
+                            <ul class="feature-list">
+                                <li>3D player movement</li>
+                                <li>Enemy avoidance</li>
+                                <li>Maze navigation</li>
+                                <li>Environment interactions</li>
+                                <li>Triggers and collision mechanics</li>
+                            </ul>
+                        </div>
 
                         <div class="project-tech">
-
                             <span class="tech-tag">Unity</span>
-
                             <span class="tech-tag">C#</span>
-
                             <span class="tech-tag">3D Game Development</span>
-
                         </div>
-
                     </div>
-
                 </div>
 
-
-
-                <!-- Flappy Bird Project -->
-
+                <!-- FLAPPY BIRD -->
                 <div class="project-card">
-
-                    <div class="project-img" style="background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%); display: flex; align-items: center; justify-content: center; color: white;">
-
-                        <i class="fas fa-dove" style="font-size: 4rem;"></i>
-
+                    <div class="project-img"
+                         style="background: linear-gradient(135deg, #4CAF50, #8BC34A);">
+                        <i class="fas fa-dove"></i>
                     </div>
 
                     <div class="project-info">
+                        <h3 class="project-title">
+                            Flappy Bird – 2D Game
+                        </h3>
 
-                        <h3 class="project-title">Flappy Bird (2D Game)</h3>
+                        <p class="project-description">
+                            A 2D endless runner game developed
+                            using Unity and C#, featuring
+                            obstacle avoidance and
+                            score-based gameplay.
+                        </p>
 
-                        <p class="project-description">Created a 2D endless runner game in Unity using C#, featuring obstacle mechanics, collision detection, score tracking, and smooth player controls for an engaging gameplay experience.</p>
+                        <div class="project-features">
+                            <h4>Key Features:</h4>
+                            <ul class="feature-list">
+                                <li>Player movement controls</li>
+                                <li>Obstacle mechanics</li>
+                                <li>Collision detection</li>
+                                <li>Score tracking</li>
+                            </ul>
+                        </div>
 
                         <div class="project-tech">
-
                             <span class="tech-tag">Unity</span>
-
                             <span class="tech-tag">C#</span>
-
                             <span class="tech-tag">2D Game Development</span>
-
                             <span class="tech-tag">Game Physics</span>
-
                         </div>
-
                     </div>
-
                 </div>
 
-
-
-                <!-- Hotel Management System -->
-
+                <!-- HOTEL MANAGEMENT -->
                 <div class="project-card">
-
-                    <div class="project-img" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); display: flex; align-items: center; justify-content: center; color: white;">
-
-                        <i class="fas fa-hotel" style="font-size: 4rem;"></i>
-
+                    <div class="project-img"
+                         style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                        <i class="fas fa-building"></i>
                     </div>
 
                     <div class="project-info">
+                        <h3 class="project-title">
+                            Hotel Management System
+                        </h3>
 
-                        <h3 class="project-title">Hotel Management System</h3>
+                        <p class="project-description">
+                            A C++ hotel management application
+                            built using object-oriented programming
+                            principles to handle operational
+                            workflows.
+                        </p>
 
-                        <p class="project-description">Developed a hotel management system in C++ using OOP, handling booking, check-in/out, and payment with scalable and maintainable design.</p>
+                        <div class="project-features">
+                            <h4>Key Features:</h4>
+                            <ul class="feature-list">
+                                <li>Room booking management</li>
+                                <li>Check-in and check-out</li>
+                                <li>Payment handling</li>
+                                <li>Object-oriented system design</li>
+                            </ul>
+                        </div>
 
                         <div class="project-tech">
-
                             <span class="tech-tag">C++</span>
-
                             <span class="tech-tag">OOP</span>
-
                             <span class="tech-tag">System Design</span>
-
                         </div>
-
                     </div>
-
                 </div>
 
-
-
-                <!-- Election Voting System -->
-
+                <!-- ELECTION VOTING -->
                 <div class="project-card">
-
-                    <div class="project-img" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); display: flex; align-items: center; justify-content: center; color: white;">
-
-                        <i class="fas fa-vote-yea" style="font-size: 4rem;"></i>
-
+                    <div class="project-img"
+                         style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+                        <i class="fas fa-vote-yea"></i>
                     </div>
 
                     <div class="project-info">
+                        <h3 class="project-title">
+                            Election Voting System
+                        </h3>
 
-                        <h3 class="project-title">Election Voting System</h3>
+                        <p class="project-description">
+                            An SQL-based election voting system
+                            implementing vote authentication,
+                            vote counting, and result
+                            visualization.
+                        </p>
 
-                        <p class="project-description">Created an SQL-based voting system with vote authentication, automated vote counting, and result visualization for secure and transparent elections.</p>
+                        <div class="project-features">
+                            <h4>Key Features:</h4>
+                            <ul class="feature-list">
+                                <li>Vote authentication</li>
+                                <li>Automated vote counting</li>
+                                <li>Election result visualization</li>
+                                <li>Database-backed operations</li>
+                            </ul>
+                        </div>
 
                         <div class="project-tech">
-
                             <span class="tech-tag">SQL</span>
-
-                            <span class="tech-tag">Database</span>
-
+                            <span class="tech-tag">Database Design</span>
                             <span class="tech-tag">System Security</span>
-
                         </div>
-
                     </div>
-
                 </div>
 
-
-
-                <!-- Sudoku Game -->
-
+                <!-- SUDOKU -->
                 <div class="project-card">
-
-                    <div class="project-img" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); display: flex; align-items: center; justify-content: center; color: white;">
-
-                        <i class="fas fa-th" style="font-size: 4rem;"></i>
-
+                    <div class="project-img"
+                         style="background: linear-gradient(135deg, #fa709a, #fee140);">
+                        <i class="fas fa-th"></i>
                     </div>
 
                     <div class="project-info">
+                        <h3 class="project-title">
+                            Sudoku Game in Assembly
+                        </h3>
 
-                        <h3 class="project-title">Sudoku Game</h3>
+                        <p class="project-description">
+                            A Sudoku game implemented using
+                            x86 Assembly Language, BIOS
+                            interrupts, and direct video
+                            memory manipulation.
+                        </p>
 
-                        <p class="project-description">Implemented a Sudoku game in Assembly using BIOS interrupts and direct video memory manipulation, enabling real-time puzzle solving and validation.</p>
+                        <div class="project-features">
+                            <h4>Key Features:</h4>
+                            <ul class="feature-list">
+                                <li>Sudoku puzzle interaction</li>
+                                <li>Puzzle validation</li>
+                                <li>BIOS interrupt handling</li>
+                                <li>Direct video memory access</li>
+                            </ul>
+                        </div>
 
                         <div class="project-tech">
-
                             <span class="tech-tag">Assembly Language</span>
-
                             <span class="tech-tag">x86</span>
-
                             <span class="tech-tag">Low-Level Programming</span>
-
                         </div>
-
                     </div>
-
                 </div>
 
-
-
-                <!-- Bingo Game -->
-
+                <!-- BINGO -->
                 <div class="project-card">
-
-                    <div class="project-img" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); display: flex; align-items: center; justify-content: center; color: white;">
-
-                        <i class="fas fa-dice" style="font-size: 4rem;"></i>
-
+                    <div class="project-img"
+                         style="background: linear-gradient(135deg, #a8edea, #b48edf);">
+                        <i class="fas fa-dice"></i>
                     </div>
 
                     <div class="project-info">
+                        <h3 class="project-title">
+                            Bingo Game – C++
+                        </h3>
 
-                        <h3 class="project-title">Bingo Game (C++)</h3>
+                        <p class="project-description">
+                            A multiplayer Bingo game developed
+                            in C++, featuring interactive
+                            gameplay, dynamic cards,
+                            and score tracking.
+                        </p>
 
-                        <p class="project-description">Built a multiplayer Bingo Game in C++ with a user-friendly interface, real-time score updates, and dynamic card generation to enhance interaction and gameplay.</p>
-
-                        <div class="project-tech">
-
-                            <span class="tech-tag">C++</span>
-
-                            <span class="tech-tag">Multiplayer</span>
-
-                            <span class="tech-tag">Game Development</span>
-
+                        <div class="project-features">
+                            <h4>Key Features:</h4>
+                            <ul class="feature-list">
+                                <li>Multiplayer gameplay</li>
+                                <li>Dynamic card generation</li>
+                                <li>Real-time score updates</li>
+                                <li>Interactive game interface</li>
+                            </ul>
                         </div>
 
+                        <div class="project-tech">
+                            <span class="tech-tag">C++</span>
+                            <span class="tech-tag">Multiplayer</span>
+                            <span class="tech-tag">Game Development</span>
+                        </div>
                     </div>
-
                 </div>
 
             </div>
-
         </div>
-
     </section>
 
-
-
-    <!-- CONTACT SECTION -->
-
+    <!-- CONTACT -->
     <section id="contact">
-
         <div class="container">
 
             <div class="section-title">
-
-                <h2>Contact</h2>
-
-                <p>Feel free to reach out for opportunities or collaboration</p>
-
+                <h2>Contact Me</h2>
+                <p>
+                    Feel free to reach out for opportunities,
+                    collaboration, or technical discussions
+                </p>
             </div>
 
             <div class="contact-content">
-
                 <div class="contact-info">
 
                     <div class="contact-item">
-
                         <div class="contact-icon">
-
                             <i class="fas fa-envelope"></i>
-
                         </div>
-
                         <h3>Email</h3>
-
-                        <a href="mailto:fahad29062003@gmail.com" target="_blank" rel="noopener noreferrer">fahad29062003@gmail.com</a>
-
+                        <a href="mailto:fahad29062003@gmail.com">
+                            fahad29062003@gmail.com
+                        </a>
                     </div>
 
-
-
                     <div class="contact-item">
-
                         <div class="contact-icon">
-
-                            <i class="fas fa-phone"></i>
-
+                            <i class="fab fa-github"></i>
                         </div>
-
-                        <h3>Phone</h3>
-
-                        <a href="tel:+923379784425" target="_blank" rel="noopener noreferrer">+92 337-9784425</a>
-
+                        <h3>GitHub</h3>
+                        <a href="https://github.com/fahadahmed628"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            github.com/fahadahmed628
+                        </a>
                     </div>
 
-
-
                     <div class="contact-item">
-
                         <div class="contact-icon">
-
                             <i class="fab fa-linkedin"></i>
-
                         </div>
-
                         <h3>LinkedIn</h3>
-
-                        <a href="https://linkedin.com/in/fahad-ahmed-4571a3281" target="_blank" rel="noopener noreferrer">linkedin.com/in/fahad-ahmed</a>
-
+                        <a href="https://www.linkedin.com/in/fahad-ahmed-4571a3281/"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            View My Profile
+                        </a>
                     </div>
 
-
-
                     <div class="contact-item">
-
                         <div class="contact-icon">
-
                             <i class="fas fa-map-marker-alt"></i>
-
                         </div>
-
                         <h3>Location</h3>
-
                         <p>Lahore, Pakistan</p>
-
                     </div>
 
                 </div>
-
             </div>
-
         </div>
-
     </section>
 
-
-
     <!-- FOOTER -->
-
     <footer>
-
         <div class="container">
 
-            <div class="logo" style="color: var(--footer-text);">Fahad Ahmed</div>
+            <div class="logo">Fahad Ahmed</div>
 
-            <p style="margin: 20px 0; opacity: 0.9;">Computer Science Student | AI & Game Development Specialist</p>
+            <p style="margin-top: 15px;">
+                Computer Science Student |
+                Software Engineering |
+                Full-Stack, Android & Game Development
+            </p>
 
+            <div class="social-links">
 
+                <a href="https://github.com/fahadahmed628"
+                   class="social-link"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
 
-           <div class="social-links">
+                <a href="https://www.linkedin.com/in/fahad-ahmed-4571a3281/"
+                   class="social-link"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
 
-    <a href="https://github.com/fahadahmed628" class="social-link" target="_blank" rel="noopener noreferrer">
-
-        <i class="fab fa-github"></i>
-
-    </a>
-
-    <a href="https://www.linkedin.com/in/fahad-ahmed-4571a3281/" class="social-link" target="_blank" rel="noopener noreferrer">
-
-        <i class="fab fa-linkedin"></i>
-
-    </a>
-
-    <a href="https://www.instagram.com/fahad_ahmed_2003/" class="social-link" target="_blank" rel="noopener noreferrer">
-
-        <i class="fab fa-instagram"></i>
-
-    </a>
-
-</div>
-
-
-
-            <div class="copyright">
-
-                &copy; 2026 Fahad Ahmed Portfolio. All Rights Reserved.
+                <a href="https://www.instagram.com/fahad_ahmed_2003/"
+                   class="social-link"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
 
             </div>
 
-        </div>
+            <div class="copyright">
+                &copy; 2026 Fahad Ahmed Portfolio.
+                All Rights Reserved.
+            </div>
 
+        </div>
     </footer>
 
-
-
+    <!-- JAVASCRIPT -->
     <script>
-
-        // Theme Toggle Functionality
-
+        // THEME TOGGLE
         const themeToggle = document.getElementById('theme-toggle');
-
         const htmlElement = document.documentElement;
 
+        // Sync the checkbox with the selected theme.
+        themeToggle.checked =
+            htmlElement.getAttribute('data-theme') === 'dark';
 
+        themeToggle.addEventListener('change', function () {
+            const selectedTheme = this.checked ? 'dark' : 'light';
 
-        // Check for saved theme preference or default to light
+            htmlElement.setAttribute('data-theme', selectedTheme);
 
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-
-        if (savedTheme === 'dark') {
-
-            htmlElement.setAttribute('data-theme', 'dark');
-
-            themeToggle.checked = true;
-
-        }
-
-
-
-        // Toggle theme on switch click
-
-        themeToggle.addEventListener('change', function() {
-
-            if (this.checked) {
-
-                htmlElement.setAttribute('data-theme', 'dark');
-
-                localStorage.setItem('theme', 'dark');
-
-            } else {
-
-                htmlElement.setAttribute('data-theme', 'light');
-
-                localStorage.setItem('theme', 'light');
-
+            // Remember the visitor's preference.
+            try {
+                localStorage.setItem('theme', selectedTheme);
+            } catch (error) {
+                // Theme switching still works if storage is unavailable.
             }
-
         });
 
+        // MOBILE NAVIGATION
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navLinks = document.getElementById('nav-links');
 
-
-        // Mobile menu toggle
-
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-
-            const navLinks = document.querySelector('.nav-links');
-
-            navLinks.classList.toggle('active');
-
-        });
-
-
-
-        // Close mobile menu when clicking a link
-
-        document.querySelectorAll('.nav-links a').forEach(link => {
-
-            link.addEventListener('click', () => {
-
-                const navLinks = document.querySelector('.nav-links');
-
-                if (navLinks.classList.contains('active')) {
-
-                    navLinks.classList.remove('active');
-
-                }
-
-            });
-
-        });
-
-
-
-        // Smooth scrolling function
-
-        function smoothScrollTo(targetId) {
-
-            const targetElement = document.querySelector(targetId);
-
-            if (!targetElement) return;
-
-
-
-            const navHeight = document.querySelector('nav').offsetHeight;
-
-            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-
-            const offsetPosition = targetPosition - navHeight;
-
-
-
-            window.scrollTo({
-
-                top: offsetPosition,
-
-                behavior: 'smooth'
-
-            });
-
+        function closeMobileMenu() {
+            navLinks.classList.remove('active');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
         }
 
+        mobileMenuBtn.addEventListener('click', function () {
+            const isOpen = navLinks.classList.toggle('active');
 
+            this.setAttribute('aria-expanded', String(isOpen));
 
-        // Navigation link click handlers
-
-        document.querySelectorAll('.nav-links a, .cta-button').forEach(link => {
-
-            link.addEventListener('click', function(e) {
-
-                if (this.classList.contains('cta-button')) {
-
-                    e.preventDefault();
-
-                    const targetId = this.getAttribute('href');
-
-
-
-                    // Close mobile menu if open
-
-                    if (window.innerWidth <= 768) {
-
-                        document.querySelector('.nav-links').classList.remove('active');
-
-                    }
-
-
-
-                    // Smooth scroll to target
-
-                    smoothScrollTo(targetId);
-
-                }
-
-            });
-
+            this.innerHTML = isOpen
+                ? '<i class="fas fa-times"></i>'
+                : '<i class="fas fa-bars"></i>';
         });
 
-
-
-        // Logo click handler
-
-        document.querySelector('.logo').addEventListener('click', function(e) {
-
-            e.preventDefault();
-
-            smoothScrollTo('#hero');
-
+        // Close the mobile menu after selecting a section.
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
         });
 
+        // Close the menu when switching to desktop width.
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 768) {
+                closeMobileMenu();
+            }
+        });
 
-
-        // Update year in copyright
-
-        document.querySelector('.copyright').innerHTML = `&copy; ${new Date().getFullYear()} Fahad Ahmed. All Rights Reserved.`;
-
+        // Close menu when Escape is pressed.
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closeMobileMenu();
+            }
+        });
     </script>
 
 </body>
-
 </html>
